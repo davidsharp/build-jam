@@ -45,6 +45,13 @@ function match:update(dt)
     self:placePiece(self.piece)
     self:newPiece()
   end
+  
+  local i = math.floor(self.piece.x/dims.tile_size)
+  local j = math.floor(self.piece.y/dims.tile_size)
+  if self.filled[''..i..'-'..j+1] then
+    self:placePiece(self.piece)
+    self:newPiece()
+  end
 end
 
 function match:newPiece()
