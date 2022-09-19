@@ -55,7 +55,7 @@ function match:update(dt)
 end
 
 function match:newPiece()
-  self.piece = {x = (dims.width/2) * dims.tile_size, y = 0}
+  self.piece = {x = (dims.width/2) * dims.tile_size, y = -dims.tile_size}
 end
 
 function match:placePiece()
