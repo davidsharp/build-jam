@@ -79,7 +79,8 @@ function match:update(dt)
 end
 
 function match:newPiece()
-  self.piece = piece:new()
+  self.piece = self.next or piece:new()
+  self.next = piece:new()
   self.piece.x = (dims.width/2) * dims.tile_size
   self.piece.y = -dims.tile_size
 end
@@ -171,25 +172,33 @@ function match:draw(x,y)
     end
   end
 
-  --love.graphics.rectangle('fill',x + match.piece.x,y + match.piece.y,dims.tile_size,dims.tile_size)
-  if self.piece.br then
-    love.graphics.draw(tiles,tileMap[self.piece.br],x + self.piece.x,y + self.piece.y)
+  drawPiece(self.piece,x,y)
+end
+
+function drawPiece(p,x,y)
+  -- un-init'd pieces need dimensions setting
+  -- TODO, do in :new()
+  p.x = p.x or 0
+  p.y = p.y or 0
+
+  if p.br then
+    love.graphics.draw(tiles,tileMap[p.br],x + p.x,y + p.y)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x,y + self.piece.y)
+    love.graphics.draw(k_tiles,tileMap.null,x + p.x,y + p.y)
   end
-  if self.piece.bl then
-    love.graphics.draw(tiles,tileMap[self.piece.bl],x + self.piece.x - dims.tile_size,y + self.piece.y)
+  if p.bl then
+    love.graphics.draw(tiles,tileMap[p.bl],x + p.x - dims.tile_size,y + p.y)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x - dims.tile_size,y + self.piece.y)
+    love.graphics.draw(k_tiles,tileMap.null,x + p.x - dims.tile_size,y + p.y)
   end
-  if self.piece.tr then
-    love.graphics.draw(tiles,tileMap[self.piece.tr],x + self.piece.x,y + self.piece.y - dims.tile_size)
+  if p.tr then
+    love.graphics.draw(tiles,tileMap[p.tr],x + p.x,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x,y + self.piece.y - dims.tile_size)
+    love.graphics.draw(k_tiles,tileMap.null,x + p.x,y + p.y - dims.tile_size)
   end
-  if self.piece.tl then
-    love.graphics.draw(tiles,tileMap[self.piece.tl],x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
+  if p.tl then
+    love.graphics.draw(tiles,tileMap[p.tl],x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
+    love.graphics.draw(k_tiles,tileMap.null,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   end
 end

@@ -26,7 +26,9 @@ function matchScene.draw()
 
   love.graphics.scale(2)
   --love.graphics.print("match TODO",30,30)
-  gameState.match:draw(50,0)
+  gameState.match:draw(48,0)
+
+  drawPiece(gameState.match.next,48 + (11*16), 48)
 end
 
 function matchScene.keypressed(key)
