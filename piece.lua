@@ -57,8 +57,14 @@ function piece:randomise()
   end
 end
 
--- rotate clockwise
 function piece:rotateLeft()
+  self:rotateClockwise()
+end
+function piece:rotateRight()
+  self:rotateAntiClockwise()
+end
+
+function piece:rotateClockwise()
   temp = {tl = self.bl, tr = self.tl, br = self.tr, bl = self.br}
   self.tl = temp.tl or false
   self.tr = temp.tr or false
@@ -66,9 +72,10 @@ function piece:rotateLeft()
   self.br = temp.br or false
 end
 
-function piece:rotateRight()
-  -- TODO: actual rotate right
-  self:rotateLeft()
-  self:rotateLeft()
-  self:rotateLeft()
+function piece:rotateAntiClockwise()
+  temp = {tl = self.tr, tr = self.br, br = self.bl, bl = self.tl}
+  self.tl = temp.tl or false
+  self.tr = temp.tr or false
+  self.bl = temp.bl or false
+  self.br = temp.br or false
 end
