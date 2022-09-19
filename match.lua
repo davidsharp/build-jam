@@ -23,7 +23,7 @@ function match:new(o)
 end
 
 function match:init()
-  match.piece = {x = 0, y = 0}
+  match:newPiece()
   match.filled = {}
 end
 
@@ -39,6 +39,14 @@ function match:update(dt)
     match.piece.y = match.piece.y + (dt * match.speed)
   end
   match.piece.y = match.piece.y + (dt * match.speed)
+
+  if (match.piece.y) >= (dims.height * dims.tile_size) then
+    self:newPiece()
+  end
+end
+
+function match:newPiece()
+  match.piece = {x = (dims.width/2) * dims.tile_size, y = 0}
 end
 
 function match:keypressed(key)
