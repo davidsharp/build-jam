@@ -16,6 +16,9 @@ dims = {
 function match:new(o)
     o = o or {}
 
+    --o.score = 0
+    o.lines = 0
+
     setmetatable(o, self)
     self.__index = self
     self.__tostring = function() return 'match{'..o.id..'}' end
@@ -36,12 +39,6 @@ function match:init()
 end
 
 function match:update(dt)
-  --[[if love.keyboard.isDown('left') then
-    match.piece.x = match.piece.x - (dt * 50)
-  end
-  if love.keyboard.isDown('right') then
-    match.piece.x = match.piece.x + (dt * 50)
-  end]]
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
     self.piece.y = self.piece.y + (dt * match.speed)
@@ -82,10 +79,11 @@ function match:newPiece()
   self.piece = piece:new({from = self.next}) or piece:new()
   self.next = piece:new()
   self.piece.x = (dims.width/2) * dims.tile_size
-  self.piece.y = -dims.tile_size
+  self.piece.y = 0---dims.tile_size
 end
 
 function match:placePiece()
+  local gameOver = false
   -- Consider refactoring
   if self.piece.tl then
     local x = math.floor(self.piece.x/dims.tile_size)-1
@@ -101,12 +99,19 @@ function match:placePiece()
     local x = math.floor(self.piece.x/dims.tile_size)-1
     local y = math.floor(self.piece.y/dims.tile_size)
     match.filled[''..x..'-'..y] = self.piece.bl
+
+    if y <= 1 then gameOver = true end
   end
   if self.piece.br then
     local x = math.floor(self.piece.x/dims.tile_size)
     local y = math.floor(self.piece.y/dims.tile_size)
     match.filled[''..x..'-'..y] = self.piece.br
+
+    if y <= 1 then gameOver = true end
   end
+
+  -- TODO: proper game end (freeze then callback?)
+  if gameOver then self:init() end
 end
 
 function match:rotatePiece()
@@ -162,6 +167,8 @@ function match:draw(x,y)
   x = x or 0
   y = y or 0
   love.graphics.rectangle("line",x,y,dims.tile_size*(dims.width+1),dims.tile_size*(dims.height+1))
+  -- top-line
+  love.graphics.rectangle("line",x,y+dims.tile_size,dims.tile_size*(dims.width+1),1)
   for i=0, dims.width do
     for j=0, dims.height do
       if self.filled[''..i..'-'..j] then
