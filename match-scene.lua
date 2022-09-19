@@ -1,3 +1,5 @@
+require 'match'
+
 matchScene = {}
 
 function matchScene.set()
@@ -11,14 +13,19 @@ function matchScene.set()
 end
 
 function matchScene.load()
+  gameState.match = match:new()
 end
 
 function matchScene.update(dt)
+  if not gameState.match then return end
 end
 
 function matchScene.draw()
+  if not gameState.match then return end
+
   love.graphics.scale(2)
-  love.graphics.print("match TODO",50,50)
+  love.graphics.print("match TODO",30,30)
+  gameState.match:draw(50,50)
 end
 
 function matchScene.keypressed(key)
