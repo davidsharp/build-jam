@@ -47,10 +47,15 @@ function match:update(dt)
     self:placePiece(self.piece)
     self:newPiece()
   end
-  
+
+  local hasCollided = false
+  -- TODO check _all_ pieces
   local i = math.floor(self.piece.x/dims.tile_size)
   local j = math.floor(self.piece.y/dims.tile_size)
   if self.filled[''..i..'-'..j+1] then
+    hasCollided = true
+  end
+  if hasCollided then
     self:placePiece(self.piece)
     self:newPiece()
   end
@@ -63,10 +68,27 @@ function match:newPiece()
 end
 
 function match:placePiece()
-  local x = math.floor(self.piece.x/dims.tile_size)
-  local y = math.floor(self.piece.y/dims.tile_size)
-  print(x,y)
-  match.filled[''..x..'-'..y] = true
+  -- Consider refactoring
+  if self.piece.tl then
+    local x = math.floor(self.piece.x/dims.tile_size)-1
+    local y = math.floor(self.piece.y/dims.tile_size)-1
+    match.filled[''..x..'-'..y] = true
+  end
+  if self.piece.tr then
+    local x = math.floor(self.piece.x/dims.tile_size)
+    local y = math.floor(self.piece.y/dims.tile_size)-1
+    match.filled[''..x..'-'..y] = true
+  end
+  if self.piece.bl then
+    local x = math.floor(self.piece.x/dims.tile_size)-1
+    local y = math.floor(self.piece.y/dims.tile_size)
+    match.filled[''..x..'-'..y] = true
+  end
+  if self.piece.br then
+    local x = math.floor(self.piece.x/dims.tile_size)
+    local y = math.floor(self.piece.y/dims.tile_size)
+    match.filled[''..x..'-'..y] = true
+  end
 end
 
 function match:rotatePiece()
