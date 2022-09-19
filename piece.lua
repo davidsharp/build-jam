@@ -26,12 +26,18 @@ function piece:randomise()
   end
 
   self.tl = nil --pieces[1] == '' and nil or pieces[1]
-  self.tr = pieces[2] == '' and nil or pieces[2]
-  self.bl = pieces[3] == '' and nil or pieces[3]
-  self.br = pieces[4] == '' and nil or pieces[4]
+  self.tr = pieces[2] == '' and false or pieces[2]
+  self.bl = pieces[3] == '' and false or pieces[3]
+  self.br = pieces[4] == '' and false or pieces[4]
 end
 
+-- rotate clockwise
 function piece:rotateLeft()
+  temp = {tl = self.bl, tr = self.tl, br = self.tr, bl = self.br}
+  self.tl = temp.tl or false
+  self.tr = temp.tr or false
+  self.bl = temp.bl or false
+  self.br = temp.br or false
 end
 
 function piece:rotateRight()

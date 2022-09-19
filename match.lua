@@ -146,6 +146,10 @@ function match:keypressed(key)
     end
   end
 
+  if key == 'a' then
+    self.piece:rotateLeft()
+  end
+
   -- debug, refresh
   if key == 'return' then
     self:init()
