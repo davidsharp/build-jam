@@ -17,6 +17,7 @@ function matchScene.update(dt)
 end
 
 function matchScene.draw()
+  love.graphics.scale(2)
   love.graphics.print("match TODO",50,50)
 end
 

@@ -17,10 +17,8 @@ function menuScene.update(dt)
 end
 
 function menuScene.draw()
-  --love.graphics.setCanvas(canvas)
+  love.graphics.scale(2)
   love.graphics.print("press enter to start",50,50)
-  --love.graphics.setCanvas()
-  --love.graphics.draw(canvas,0,0,0,2,2)
 end
 
 function menuScene.keypressed(key)

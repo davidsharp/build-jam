@@ -1,8 +1,6 @@
 require 'menu-scene'
 require 'match-scene'
 
-canvas = love.graphics.newCanvas(400, 240)
-
 gameState = {
   scene = "menu"
 }
