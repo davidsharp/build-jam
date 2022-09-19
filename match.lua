@@ -125,11 +125,16 @@ function match:checkLine(row)
       foundEmpty = true
     end
   end
-  if not foundEmpty then self:clearLine(row1) end
+  if not foundEmpty then self:clearLine(row) end
 end
 
 function match:clearLine(row)
-  -- TODO, actually clear
+  -- clear line
+  for i=0,dims.width do
+    self.filled[''..i..'-'..row] = nil
+  end
+  -- TODO, move blocks above line down
+  -- TODO, freeze, blink?, then move
   self.lines = self.lines + 1
 end
 
