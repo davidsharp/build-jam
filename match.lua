@@ -54,14 +54,15 @@ end
 function match:placePiece()
   local x = math.floor(self.piece.x/dims.tile_size)
   local y = math.floor(self.piece.y/dims.tile_size)
+  print(x,y)
   match.filled[''..x..'-'..y] = true
 end
 
 function match:keypressed(key)
   if key == 'left' then
-    self.piece.x = math.max(0,self.piece.x - dims.tile_size)
+    self.piece.x = math.max(0,self.piece.x - match.moveBy)
   elseif key == 'right' then
-    self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + dims.tile_size)
+    self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
   end
 end
 
