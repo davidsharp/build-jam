@@ -112,7 +112,7 @@ function match:keypressed(key)
   -- TODO - check collision when moving left/right
   if key == 'left' then
     -- 1 is minimum, as piece center is always one square in
-    self.piece.x = math.max(1,self.piece.x - match.moveBy)
+    self.piece.x = math.max(dims.tile_size,self.piece.x - match.moveBy)
   elseif key == 'right' then
     self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
   end
