@@ -7,8 +7,8 @@ match = {
 
 dims = {
   tile_size = 16,
-  width = 10,
-  height = 10
+  width = 8,
+  height = 14
 }
 
 function match:new(o)
@@ -63,6 +63,10 @@ function match:placePiece()
   local y = math.floor(self.piece.y/dims.tile_size)
   print(x,y)
   match.filled[''..x..'-'..y] = true
+end
+
+function match:rotatePiece()
+  --
 end
 
 function match:keypressed(key)

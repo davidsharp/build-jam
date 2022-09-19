@@ -25,8 +25,8 @@ function matchScene.draw()
   if not gameState.match then return end
 
   love.graphics.scale(2)
-  love.graphics.print("match TODO",30,30)
-  gameState.match:draw(50,50)
+  --love.graphics.print("match TODO",30,30)
+  gameState.match:draw(50,0)
 end
 
 function matchScene.keypressed(key)
