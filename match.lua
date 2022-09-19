@@ -28,6 +28,10 @@ end
 function match:init()
   match:newPiece()
   match.filled = {}
+
+  tileMap = {
+    brick = getTile(tiles,11,19)
+  }
 end
 
 function match:update(dt)
@@ -85,22 +89,22 @@ function match:placePiece()
   if self.piece.tl then
     local x = math.floor(self.piece.x/dims.tile_size)-1
     local y = math.floor(self.piece.y/dims.tile_size)-1
-    match.filled[''..x..'-'..y] = true
+    match.filled[''..x..'-'..y] = self.piece.tl
   end
   if self.piece.tr then
     local x = math.floor(self.piece.x/dims.tile_size)
     local y = math.floor(self.piece.y/dims.tile_size)-1
-    match.filled[''..x..'-'..y] = true
+    match.filled[''..x..'-'..y] = self.piece.tr
   end
   if self.piece.bl then
     local x = math.floor(self.piece.x/dims.tile_size)-1
     local y = math.floor(self.piece.y/dims.tile_size)
-    match.filled[''..x..'-'..y] = true
+    match.filled[''..x..'-'..y] = self.piece.bl
   end
   if self.piece.br then
     local x = math.floor(self.piece.x/dims.tile_size)
     local y = math.floor(self.piece.y/dims.tile_size)
-    match.filled[''..x..'-'..y] = true
+    match.filled[''..x..'-'..y] = self.piece.br
   end
 end
 
@@ -157,23 +161,24 @@ function match:draw(x,y)
     for j=0, dims.height do
       love.graphics.rectangle("line",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
       if self.filled[''..i..'-'..j] then
-        love.graphics.rectangle("fill",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
+        love.graphics.draw(tiles,tileMap[self.filled[''..i..'-'..j]],x+(i*dims.tile_size),y+(j*dims.tile_size))
+        --love.graphics.rectangle("fill",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
         --love.graphics.print(''..i..'-'..j,x+(i*dims.tile_size),y+(j*dims.tile_size))
       end
     end
   end
 
   --love.graphics.rectangle('fill',x + match.piece.x,y + match.piece.y,dims.tile_size,dims.tile_size)
-  if self.piece.br ~= nil then
-    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y)
+  if self.piece.br then
+    love.graphics.draw(tiles,tileMap[self.piece.br],x + self.piece.x,y + self.piece.y)
   end
   if self.piece.bl then
-    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x - dims.tile_size,y + self.piece.y)
+    love.graphics.draw(tiles,tileMap[self.piece.bl],x + self.piece.x - dims.tile_size,y + self.piece.y)
   end
   if self.piece.tr then
-    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y - dims.tile_size)
+    love.graphics.draw(tiles,tileMap[self.piece.tr],x + self.piece.x,y + self.piece.y - dims.tile_size)
   end
   if self.piece.tl then
-    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
+    love.graphics.draw(tiles,tileMap[self.piece.tl],x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
   end
 end
