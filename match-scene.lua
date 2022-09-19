@@ -17,6 +17,8 @@ function matchScene.load()
 end
 
 function matchScene.update(dt)
+  -- tick the pseudo-random number along a bunch
+  math.random()
   if not gameState.match then return end
   gameState.match:update(dt)
 end

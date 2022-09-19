@@ -14,6 +14,8 @@ function menuScene.load()
 end
 
 function menuScene.update(dt)
+  -- tick the pseudo-random number along a bunch
+  math.random()
 end
 
 function menuScene.draw()
