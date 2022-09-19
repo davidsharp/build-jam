@@ -120,7 +120,7 @@ end
 -- accept an arbitrary number of rows?
 function match:checkLine(row)
   local foundEmpty = false
-  for i=0,dims.width-1 do
+  for i=0,dims.width do
     if not self.filled[''..i..'-'..row] then
       foundEmpty = true
     end
