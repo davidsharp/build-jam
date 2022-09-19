@@ -18,6 +18,7 @@ end
 
 function matchScene.update(dt)
   if not gameState.match then return end
+  gameState.match:update(dt)
 end
 
 function matchScene.draw()

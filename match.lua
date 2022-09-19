@@ -1,6 +1,8 @@
 -- match class, inits, draws and stores state of match
 
-match = {}
+match = {
+  speed = 15
+}
 
 dims = {
   tile_size = 16,
@@ -26,13 +28,24 @@ function match:init()
 end
 
 function match:update(dt)
+  --[[if love.keyboard.isDown('left') then
+    match.piece.x = match.piece.x - (dt * 50)
+  end
+  if love.keyboard.isDown('right') then
+    match.piece.x = match.piece.x + (dt * 50)
+  end]]
+  -- double speed on down *shrug*
+  if love.keyboard.isDown('down') then
+    match.piece.y = match.piece.y + (dt * match.speed)
+  end
+  match.piece.y = match.piece.y + (dt * match.speed)
 end
 
 function match:keypressed(key)
   if key == 'left' then
-    match.piece.x = match.piece.x - 1
+    match.piece.x = math.max(0,match.piece.x - dims.tile_size)
   elseif key == 'right' then
-    match.piece.x = match.piece.x + 1
+    match.piece.x = math.min(dims.width*dims.tile_size,match.piece.x + dims.tile_size)
   end
 end
 
