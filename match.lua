@@ -54,23 +54,22 @@ function match:update(dt)
   end
 
   local hasCollided = false
-  -- TODO ignore non-filled pieces
   local i = math.floor(self.piece.x/dims.tile_size)
   local j = math.floor(self.piece.y/dims.tile_size)
   -- tl
-  if self.filled[''..(i-1)..'-'..j] then
+  if self.piece.tl and self.filled[''..(i-1)..'-'..j] then
     hasCollided = true
   end
   -- tr
-  if self.filled[''..i..'-'..j] then
+  if self.piece.tr and self.filled[''..i..'-'..j] then
     hasCollided = true
   end
   -- bl
-  if self.filled[''..(i-1)..'-'..j+1] then
+  if self.piece.bl and self.filled[''..(i-1)..'-'..j+1] then
     hasCollided = true
   end
   -- br
-  if self.filled[''..i..'-'..j+1] then
+  if self.piece.br and self.filled[''..i..'-'..j+1] then
     hasCollided = true
   end
   if hasCollided then
