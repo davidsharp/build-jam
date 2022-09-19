@@ -161,13 +161,11 @@ end
 function match:draw(x,y)
   x = x or 0
   y = y or 0
+  love.graphics.rectangle("line",x,y,dims.tile_size*(dims.width+1),dims.tile_size*(dims.height+1))
   for i=0, dims.width do
     for j=0, dims.height do
-      love.graphics.rectangle("line",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
       if self.filled[''..i..'-'..j] then
         love.graphics.draw(tiles,tileMap[self.filled[''..i..'-'..j]],x+(i*dims.tile_size),y+(j*dims.tile_size))
-        --love.graphics.rectangle("fill",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
-        --love.graphics.print(''..i..'-'..j,x+(i*dims.tile_size),y+(j*dims.tile_size))
       end
     end
   end
