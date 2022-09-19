@@ -7,6 +7,8 @@ A game made for a small jam with friends with the theme **build**. Built in Love
 - JRPG style world
 - match-three-like gameplay
 - vs bots?
+- move bottom of playfield up gradually?
+- draw where the piece will land?
 - port to playdate (after jam?)
 
 ### Credits
