@@ -117,14 +117,13 @@ function match:keypressed(key)
   local y = math.floor(self.piece.y/dims.tile_size)
   local hasCollided = false
   if key == 'left' then
-    print(x,y)
     -- TODO ignore non-filled pieces
     -- tl
-    if self.filled[''..(x-2)..'-'..y] then
+    if self.piece.tl and self.filled[''..(x-2)..'-'..y] then
       hasCollided = true
     end
     -- bl
-    if self.filled[''..(x-2)..'-'..y+1] then
+    if self.piece.bl and self.filled[''..(x-2)..'-'..y+1] then
       hasCollided = true
     end
     if not hasCollided then
@@ -134,11 +133,11 @@ function match:keypressed(key)
   elseif key == 'right' then
     -- TODO ignore non-filled pieces
     -- tr
-    if self.filled[''..(x+1)..'-'..y] then
+    if self.piece.tr and self.filled[''..(x+1)..'-'..y] then
       hasCollided = true
     end
     -- br
-    if self.filled[''..(x+1)..'-'..y+1] then
+    if self.piece.br and self.filled[''..(x+1)..'-'..y+1] then
       hasCollided = true
     end
     if not hasCollided then

@@ -25,10 +25,10 @@ function piece:randomise()
     pieces[i] = 'brick'
   end
 
-  self.tl = pieces[1]
-  self.tr = pieces[2]
-  self.bl = pieces[3]
-  self.br = pieces[4]
+  self.tl = nil --pieces[1] == '' and nil or pieces[1]
+  self.tr = pieces[2] == '' and nil or pieces[2]
+  self.bl = pieces[3] == '' and nil or pieces[3]
+  self.br = pieces[4] == '' and nil or pieces[4]
 end
 
 function piece:rotateLeft()
