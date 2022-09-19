@@ -65,8 +65,16 @@ function match:update(dt)
     hasCollided = true
   end
   if hasCollided then
+    -- grab rows
+    local row = math.floor(self.piece.y/dims.tile_size)
+
+    -- place piece and get new
     self:placePiece(self.piece)
     self:newPiece()
+
+    -- check rows
+    self:checkLine(row-1)
+    self:checkLine(row)
   end
 end
 
@@ -107,6 +115,22 @@ function match:placePiece()
 
   -- TODO: proper game end (freeze then callback?)
   if gameOver then self:init() end
+end
+
+-- accept an arbitrary number of rows?
+function match:checkLine(row)
+  local foundEmpty = false
+  for i=0,dims.width-1 do
+    if not self.filled[''..i..'-'..row] then
+      foundEmpty = true
+    end
+  end
+  if not foundEmpty then self:clearLine(row1) end
+end
+
+function match:clearLine(row)
+  -- TODO, actually clear
+  self.lines = self.lines + 1
 end
 
 function match:rotatePiece()
