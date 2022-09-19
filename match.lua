@@ -1,5 +1,7 @@
 -- match class, inits, draws and stores state of match
 
+require 'piece'
+
 match = {
   speed = 15,
   moveBy = 16
@@ -55,7 +57,9 @@ function match:update(dt)
 end
 
 function match:newPiece()
-  self.piece = {x = (dims.width/2) * dims.tile_size, y = -dims.tile_size}
+  self.piece = piece:new()
+  self.piece.x = (dims.width/2) * dims.tile_size
+  self.piece.y = -dims.tile_size
 end
 
 function match:placePiece()
@@ -92,5 +96,16 @@ function match:draw(x,y)
   end
 
   --love.graphics.rectangle('fill',x + match.piece.x,y + match.piece.y,dims.tile_size,dims.tile_size)
-  love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y)
+  if self.piece.br ~= nil then
+    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y)
+  end
+  if self.piece.bl then
+    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x - dims.tile_size,y + self.piece.y)
+  end
+  if self.piece.tr then
+    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y - dims.tile_size)
+  end
+  if self.piece.tl then
+    love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
+  end
 end
