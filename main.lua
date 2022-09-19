@@ -11,7 +11,7 @@ function love.load()
   love.mouse.setVisible(false)
   -- makes the pixels nice and square, rather than mushy scaled blobs
   love.graphics.setDefaultFilter( "nearest" )
-  font = love.graphics.newFont( 'assets/MatchupPro/MatchupPro.ttf', 20 )
+  font = love.graphics.newFont( 'assets/MatchupPro/MatchupPro.ttf', 16 )
   love.graphics.setFont(font)
   menuScene.set()
 end
