@@ -45,35 +45,23 @@ function match:update(dt)
   end
   self.piece.y = self.piece.y + (dt * match.speed)
 
-  if (
-    self.piece.y >= (dims.height * dims.tile_size)
-    and
-    (self.piece.bl or self.piece.br )
-  ) or (
-    -- handle only having tl and tr
-    self.piece.y >= ((dims.height+1)* dims.tile_size)
-  ) then
-    self:placePiece(self.piece)
-    self:newPiece()
-  end
-
   local hasCollided = false
   local i = math.floor(self.piece.x/dims.tile_size)
   local j = math.floor(self.piece.y/dims.tile_size)
   -- tl
-  if self.piece.tl and self.filled[''..(i-1)..'-'..j] then
+  if self.piece.tl and (self.filled[''..(i-1)..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
     hasCollided = true
   end
   -- tr
-  if self.piece.tr and self.filled[''..i..'-'..j] then
+  if self.piece.tr and (self.filled[''..i..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
     hasCollided = true
   end
   -- bl
-  if self.piece.bl and self.filled[''..(i-1)..'-'..j+1] then
+  if self.piece.bl and (self.filled[''..(i-1)..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
     hasCollided = true
   end
   -- br
-  if self.piece.br and self.filled[''..i..'-'..j+1] then
+  if self.piece.br and (self.filled[''..i..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
     hasCollided = true
   end
   if hasCollided then
