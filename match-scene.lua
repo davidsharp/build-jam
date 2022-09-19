@@ -24,6 +24,7 @@ function matchScene.update(dt)
 end
 
 function matchScene.draw()
+  love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
   if not gameState.match then return end
 
   love.graphics.scale(2)
