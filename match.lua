@@ -109,12 +109,37 @@ function match:rotatePiece()
 end
 
 function match:keypressed(key)
-  -- TODO - check collision when moving left/right
+  local x = math.floor(self.piece.x/dims.tile_size)
+  local y = math.floor(self.piece.y/dims.tile_size)
+  local hasCollided = false
   if key == 'left' then
-    -- 1 is minimum, as piece center is always one square in
-    self.piece.x = math.max(dims.tile_size,self.piece.x - match.moveBy)
+    print(x,y)
+    -- TODO ignore non-filled pieces
+    -- tl
+    if self.filled[''..(x-2)..'-'..y] then
+      hasCollided = true
+    end
+    -- bl
+    if self.filled[''..(x-2)..'-'..y+1] then
+      hasCollided = true
+    end
+    if not hasCollided then
+      -- 1 is minimum, as piece center is always one square in
+      self.piece.x = math.max(dims.tile_size,self.piece.x - match.moveBy)
+    end
   elseif key == 'right' then
-    self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
+    -- TODO ignore non-filled pieces
+    -- tr
+    if self.filled[''..(x+1)..'-'..y] then
+      hasCollided = true
+    end
+    -- br
+    if self.filled[''..(x+1)..'-'..y+1] then
+      hasCollided = true
+    end
+    if not hasCollided then
+      self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
+    end
   end
 
   -- debug, refresh
@@ -133,6 +158,7 @@ function match:draw(x,y)
       love.graphics.rectangle("line",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
       if self.filled[''..i..'-'..j] then
         love.graphics.rectangle("fill",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
+        --love.graphics.print(''..i..'-'..j,x+(i*dims.tile_size),y+(j*dims.tile_size))
       end
     end
   end
