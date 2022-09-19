@@ -30,7 +30,8 @@ function match:init()
   match.filled = {}
 
   tileMap = {
-    brick = getTile(tiles,11,19)
+    brick = getTile(tiles,11,19),
+    null = getTile(k_tiles,35,12)
   }
 end
 
@@ -170,14 +171,22 @@ function match:draw(x,y)
   --love.graphics.rectangle('fill',x + match.piece.x,y + match.piece.y,dims.tile_size,dims.tile_size)
   if self.piece.br then
     love.graphics.draw(tiles,tileMap[self.piece.br],x + self.piece.x,y + self.piece.y)
+  else
+    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x,y + self.piece.y)
   end
   if self.piece.bl then
     love.graphics.draw(tiles,tileMap[self.piece.bl],x + self.piece.x - dims.tile_size,y + self.piece.y)
+  else
+    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x - dims.tile_size,y + self.piece.y)
   end
   if self.piece.tr then
     love.graphics.draw(tiles,tileMap[self.piece.tr],x + self.piece.x,y + self.piece.y - dims.tile_size)
+  else
+    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x,y + self.piece.y - dims.tile_size)
   end
   if self.piece.tl then
     love.graphics.draw(tiles,tileMap[self.piece.tl],x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
+  else
+    love.graphics.draw(k_tiles,tileMap.null,x + self.piece.x - dims.tile_size,y + self.piece.y - dims.tile_size)
   end
 end

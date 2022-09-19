@@ -14,6 +14,7 @@ function love.load()
   love.graphics.setFont(font)
 
   tiles = love.graphics.newImage('assets/1BITCanariPackTopDown/TILESET/PixelPackTOPDOWN1BIT.png')
+  k_tiles = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
 
   menuScene.set()
 end
