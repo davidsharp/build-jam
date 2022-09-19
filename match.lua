@@ -116,6 +116,11 @@ function match:keypressed(key)
   elseif key == 'right' then
     self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
   end
+
+  -- debug, refresh
+  if key == 'return' then
+    self:init()
+  end
 end
 
 -- x,y offset are where to draw the match board on the screen
