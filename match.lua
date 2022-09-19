@@ -45,7 +45,14 @@ function match:update(dt)
   end
   self.piece.y = self.piece.y + (dt * match.speed)
 
-  if (self.piece.y) >= (dims.height * dims.tile_size) then
+  if (
+    self.piece.y >= (dims.height * dims.tile_size)
+    and
+    (self.piece.bl or self.piece.br )
+  ) or (
+    -- handle only having tl and tr
+    self.piece.y >= ((dims.height+1)* dims.tile_size)
+  ) then
     self:placePiece(self.piece)
     self:newPiece()
   end
@@ -151,8 +158,11 @@ function match:keypressed(key)
     end
   end
 
+  -- TODO - rotation collision
   if key == 'a' then
     self.piece:rotateLeft()
+  elseif key == 'd' then
+    self.piece:rotateRight()
   end
 
   -- debug, refresh

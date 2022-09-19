@@ -67,4 +67,8 @@ function piece:rotateLeft()
 end
 
 function piece:rotateRight()
+  -- TODO: actual rotate right
+  self:rotateLeft()
+  self:rotateLeft()
+  self:rotateLeft()
 end
