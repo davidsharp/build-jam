@@ -49,9 +49,22 @@ function match:update(dt)
   end
 
   local hasCollided = false
-  -- TODO check _all_ pieces
+  -- TODO ignore non-filled pieces
   local i = math.floor(self.piece.x/dims.tile_size)
   local j = math.floor(self.piece.y/dims.tile_size)
+  -- tl
+  if self.filled[''..(i-1)..'-'..j] then
+    hasCollided = true
+  end
+  -- tr
+  if self.filled[''..i..'-'..j] then
+    hasCollided = true
+  end
+  -- bl
+  if self.filled[''..(i-1)..'-'..j+1] then
+    hasCollided = true
+  end
+  -- br
   if self.filled[''..i..'-'..j+1] then
     hasCollided = true
   end
@@ -96,8 +109,10 @@ function match:rotatePiece()
 end
 
 function match:keypressed(key)
+  -- TODO - check collision when moving left/right
   if key == 'left' then
-    self.piece.x = math.max(0,self.piece.x - match.moveBy)
+    -- 1 is minimum, as piece center is always one square in
+    self.piece.x = math.max(1,self.piece.x - match.moveBy)
   elseif key == 'right' then
     self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + match.moveBy)
   end
