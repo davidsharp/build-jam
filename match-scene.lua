@@ -30,7 +30,10 @@ function matchScene.draw()
   --love.graphics.print("match TODO",30,30)
   gameState.match:draw(48,0)
 
+  love.graphics.print("next",48 + (10*16), 48-32)
   drawPiece(gameState.match.next,48 + (11*16), 48)
+
+  love.graphics.print("floors:"..gameState.match.lines,48 + (10*16), 48+32)
 end
 
 function matchScene.keypressed(key)
