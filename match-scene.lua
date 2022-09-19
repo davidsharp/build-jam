@@ -29,4 +29,6 @@ function matchScene.draw()
 end
 
 function matchScene.keypressed(key)
+  if not gameState.match then return end
+  gameState.match:keypressed(key)
 end
