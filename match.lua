@@ -1,7 +1,8 @@
 -- match class, inits, draws and stores state of match
 
 match = {
-  speed = 15
+  speed = 15,
+  moveBy = 16
 }
 
 dims = {
@@ -36,24 +37,31 @@ function match:update(dt)
   end]]
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
-    match.piece.y = match.piece.y + (dt * match.speed)
+    self.piece.y = self.piece.y + (dt * match.speed)
   end
-  match.piece.y = match.piece.y + (dt * match.speed)
+  self.piece.y = self.piece.y + (dt * match.speed)
 
-  if (match.piece.y) >= (dims.height * dims.tile_size) then
+  if (self.piece.y) >= (dims.height * dims.tile_size) then
+    self:placePiece(self.piece)
     self:newPiece()
   end
 end
 
 function match:newPiece()
-  match.piece = {x = (dims.width/2) * dims.tile_size, y = 0}
+  self.piece = {x = (dims.width/2) * dims.tile_size, y = 0}
+end
+
+function match:placePiece()
+  local x = math.floor(self.piece.x/dims.tile_size)
+  local y = math.floor(self.piece.y/dims.tile_size)
+  match.filled[''..x..'-'..y] = true
 end
 
 function match:keypressed(key)
   if key == 'left' then
-    match.piece.x = math.max(0,match.piece.x - dims.tile_size)
+    self.piece.x = math.max(0,self.piece.x - dims.tile_size)
   elseif key == 'right' then
-    match.piece.x = math.min(dims.width*dims.tile_size,match.piece.x + dims.tile_size)
+    self.piece.x = math.min(dims.width*dims.tile_size,self.piece.x + dims.tile_size)
   end
 end
 
@@ -65,9 +73,12 @@ function match:draw(x,y)
   for i=0, dims.width do
     for j=0, dims.height do
       love.graphics.rectangle("line",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
+      if self.filled[''..i..'-'..j] then
+        love.graphics.rectangle("fill",x+(i*dims.tile_size),y+(j*dims.tile_size),dims.tile_size,dims.tile_size)
+      end
     end
   end
 
   --love.graphics.rectangle('fill',x + match.piece.x,y + match.piece.y,dims.tile_size,dims.tile_size)
-  love.graphics.draw(tiles,getTile(tiles,10,1),x + match.piece.x,y + match.piece.y)
+  love.graphics.draw(tiles,getTile(tiles,10,1),x + self.piece.x,y + self.piece.y)
 end
