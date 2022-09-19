@@ -79,7 +79,7 @@ function match:update(dt)
 end
 
 function match:newPiece()
-  self.piece = self.next or piece:new()
+  self.piece = piece:new({from = self.next}) or piece:new()
   self.next = piece:new()
   self.piece.x = (dims.width/2) * dims.tile_size
   self.piece.y = -dims.tile_size

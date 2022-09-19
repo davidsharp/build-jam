@@ -10,25 +10,51 @@ function piece:new(o)
 
   setmetatable(o, self)
   self.__index = self
-  self.__tostring = function() return 'piece{'..o.id..'}' end
+  --self.__tostring = function() return 'piece{'..o.id..'}' end
 
-  self:randomise()
+  if o.from then
+    o.tl = o.from.tl
+    o.tr = o.from.tr
+    o.bl = o.from.bl
+    o.br = o.from.br
+  else
+    self:randomise()
+  end
 
   return o
 end
 
 function piece:randomise()
   local pieces = {'','','',''}
-  -- 3 or 4 pieces
+
+  local offset = math.random(0,3)
+
+  local count = nil
+  local x = math.random()
+  if x > 0.5 then count = 3
+  elseif x < 0.2 then count = 2
+  else count = 4 end
 
   for i, piece in ipairs(pieces) do
-    pieces[i] = 'brick'
+    if i <= count then
+      local type = nil
+      local x = math.random()
+      if x > 0.5 then type = 'brick'
+      elseif x < 0.2 then type = 'brick'--'bomb'
+      -- todo: work on another type? spark?
+      else type = 'brick' end
+      pieces[i] = type
+    else pieces[i] = nil end
   end
 
-  self.tl = nil --pieces[1] == '' and nil or pieces[1]
-  self.tr = pieces[2] == '' and false or pieces[2]
-  self.bl = pieces[3] == '' and false or pieces[3]
-  self.br = pieces[4] == '' and false or pieces[4]
+  self.tl = pieces[1] == nil and false or pieces[1]
+  self.tr = pieces[2] == nil and false or pieces[2]
+  self.bl = pieces[3] == nil and false or pieces[3]
+  self.br = pieces[4] == nil and false or pieces[4]
+
+  for i = 0, offset do
+    self:rotateLeft()
+  end
 end
 
 -- rotate clockwise
