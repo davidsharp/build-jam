@@ -4,7 +4,10 @@ A game made for a small jam with friends with the theme **build**. Built in Love
 
 
 ## Notes / TODO
-
+- JRPG style world
+- match-three-like gameplay
+- vs bots?
+- port to playdate (after jam?)
 
 ### Credits
 
