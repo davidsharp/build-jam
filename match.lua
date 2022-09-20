@@ -218,21 +218,21 @@ function drawPiece(p,x,y)
   if p.br then
     love.graphics.draw(tiles,tileMap[p.br],x + p.x,y + p.y)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + p.x,y + p.y)
+    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x,y + p.y)
   end
   if p.bl then
     love.graphics.draw(tiles,tileMap[p.bl],x + p.x - dims.tile_size,y + p.y)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + p.x - dims.tile_size,y + p.y)
+    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x - dims.tile_size,y + p.y)
   end
   if p.tr then
     love.graphics.draw(tiles,tileMap[p.tr],x + p.x,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + p.x,y + p.y - dims.tile_size)
+    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x,y + p.y - dims.tile_size)
   end
   if p.tl then
     love.graphics.draw(tiles,tileMap[p.tl],x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles,tileMap.null,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
+    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   end
 end
