@@ -33,8 +33,9 @@ function match:init()
   match.filled = {}
 
   tileMap = {
-    brick = getTile(tiles,11,19),
-    null = getTile(k_tiles,35,12)
+    brick = {sheet=tiles,quad=getTile(tiles,11,19)},
+    bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
+    null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
   }
 end
 
@@ -215,7 +216,7 @@ function match:draw(x,y)
   for i=0, dims.width do
     for j=0, dims.height do
       if self.filled[''..i..'-'..j] then
-        love.graphics.draw(tiles,tileMap[self.filled[''..i..'-'..j]],x+(i*dims.tile_size),y+(j*dims.tile_size))
+        love.graphics.draw(tileMap[self.filled[''..i..'-'..j]].sheet,tileMap[self.filled[''..i..'-'..j]].quad,x+(i*dims.tile_size),y+(j*dims.tile_size))
       end
     end
   end
@@ -230,23 +231,23 @@ function drawPiece(p,x,y)
   p.y = p.y or 0
 
   if p.br then
-    love.graphics.draw(tiles,tileMap[p.br],x + p.x,y + p.y)
+    love.graphics.draw(tileMap[p.br].sheet,tileMap[p.br].quad,x + p.x,y + p.y)
   else
-    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x,y + p.y)
+    love.graphics.draw(tileMap.null.sheet,tileMap.null.quad,x + p.x,y + p.y)
   end
   if p.bl then
-    love.graphics.draw(tiles,tileMap[p.bl],x + p.x - dims.tile_size,y + p.y)
+    love.graphics.draw(tileMap[p.bl].sheet,tileMap[p.bl].quad,x + p.x - dims.tile_size,y + p.y)
   else
-    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x - dims.tile_size,y + p.y)
+    love.graphics.draw(tileMap.null.sheet,tileMap.null.quad,x + p.x - dims.tile_size,y + p.y)
   end
   if p.tr then
-    love.graphics.draw(tiles,tileMap[p.tr],x + p.x,y + p.y - dims.tile_size)
+    love.graphics.draw(tileMap[p.tr].sheet,tileMap[p.tr].quad,x + p.x,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x,y + p.y - dims.tile_size)
+    love.graphics.draw(tileMap.null.sheet,tileMap.null.quad,x + p.x,y + p.y - dims.tile_size)
   end
   if p.tl then
-    love.graphics.draw(tiles,tileMap[p.tl],x + p.x - dims.tile_size,y + p.y - dims.tile_size)
+    love.graphics.draw(tileMap[p.tl].sheet,tileMap[p.tl].quad,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   else
-    love.graphics.draw(k_tiles_trans,tileMap.null,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
+    love.graphics.draw(tileMap.null.sheet,tileMap.null.quad,x + p.x - dims.tile_size,y + p.y - dims.tile_size)
   end
 end
