@@ -27,6 +27,9 @@ function matchScene.draw()
   love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
   if not gameState.match then return end
 
+  -- what if yellow and black like construction tape?
+  --love.graphics.setColor(1,1,0)
+
   love.graphics.scale(2)
   --love.graphics.print("match TODO",30,30)
   gameState.match:draw(48,0)
