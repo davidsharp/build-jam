@@ -81,6 +81,8 @@ function match:update(dt)
     -- check rows
     self:checkLine(row-1)
     self:checkLine(row)
+
+    -- TODO: reward removal of two rows?
   end
 end
 
