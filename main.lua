@@ -16,6 +16,11 @@ function love.load()
   tiles = love.graphics.newImage('assets/1BITCanariPackTopDown/TILESET/PixelPackTOPDOWN1BIT.png')
   k_tiles = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
 
+  sfx = {
+    land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static')
+  }
+  sfx.land:setVolume(0.4)
+
   menuScene.set()
 end
 

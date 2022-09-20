@@ -113,6 +113,8 @@ function match:placePiece()
     if y <= 1 then gameOver = true end
   end
 
+  sfx.land:play()
+
   -- TODO: proper game end (freeze then callback?)
   if gameOver then self:init() end
 end
