@@ -35,16 +35,20 @@ function piece:randomise()
   elseif x < 0.2 then count = 2
   else count = 4 end
 
+  -- to start, set everything as bricks
   for i, piece in ipairs(pieces) do
     if i <= count then
-      local type = nil
-      local x = math.random()
-      if x > 0.5 then type = 'brick'
-      elseif x < 0.2 then type = 'brick'--'bomb'
-      -- todo: work on another type? spark?
-      else type = 'brick' end
-      pieces[i] = type
+      pieces[i] = 'brick'
     else pieces[i] = nil end
+  end
+
+  -- set <=1 blocks to be a bomb
+  -- somewhere about 1/5 pieces has a bomb
+  --  TODO could rework this, perhaps between 3 and 6 turns or something
+  local roll = math.random()
+  local hasBomb = roll < 0.2
+  if hasBomb then
+    pieces[math.random(1,count)] = 'bomb'
   end
 
   self.tl = pieces[1] == nil and false or pieces[1]

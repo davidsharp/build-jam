@@ -8,6 +8,8 @@ A game made for a small jam with friends with the theme **build**. Built in Love
 - match-three-like gameplay
 - vs bots?
 - move bottom of playfield up gradually?
+- consider dropping unattached pieces?
+- tutorial text, NPCs and unlockable trinkets?
 - draw where the piece will land?
 - port to playdate (after jam?)
 
