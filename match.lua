@@ -3,7 +3,7 @@
 require 'piece'
 
 match = {
-  speed = 15,
+  speed = 45,
   moveBy = 16
 }
 
@@ -39,11 +39,17 @@ function match:init()
 end
 
 function match:update(dt)
+  debugMovement = false
+
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
+    self.piece.y = self.piece.y + (dt * match.speed * 2)
+  elseif not debugMovement then
     self.piece.y = self.piece.y + (dt * match.speed)
   end
-  self.piece.y = self.piece.y + (dt * match.speed)
+  if debugMovement and love.keyboard.isDown('up') then
+    self.piece.y = self.piece.y - (dt * match.speed * 2)
+  end
 
   local hasCollided = false
   local i = math.floor(self.piece.x/dims.tile_size)
