@@ -135,7 +135,13 @@ function match:clearLine(row)
   for i=0,dims.width do
     self.filled[''..i..'-'..row] = nil
   end
-  -- TODO, move blocks above line down
+  -- move blocks above line down
+  for r = row-1,0,-1 do
+    for c = 0,dims.width do
+      self.filled[''..c..'-'..r+1]  = self.filled[''..c..'-'..r] 
+      self.filled[''..c..'-'..r] = nil
+    end
+  end
   -- TODO, freeze, blink?, then move
   self.lines = self.lines + 1
 end
