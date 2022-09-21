@@ -2,6 +2,8 @@
 
 require 'piece'
 
+require 'dialogue'
+
 match = {
   speed = 45,
   moveBy = 16
@@ -32,6 +34,8 @@ function match:init()
   match:newPiece()
   match.filled = {}
 
+  dialog = dialogue:new()
+
   tileMap = {
     brick = {sheet=tiles,quad=getTile(tiles,11,19)},
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
@@ -41,6 +45,8 @@ end
 
 function match:update(dt)
   debugMovement = false
+
+  if dialog then dialog:update(dt) end
 
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
@@ -222,6 +228,7 @@ function match:draw(x,y)
   end
 
   drawPiece(self.piece,x,y)
+  if dialog then dialog:draw() end
 end
 
 function drawPiece(p,x,y)
