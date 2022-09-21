@@ -48,6 +48,16 @@ function match:update(dt)
 
   if dialog then dialog:update(dt) end
 
+  -- only pauses while held (little test)
+  if love.keyboard.isDown('p') then
+    paused = true
+  else
+    paused = false
+  end
+
+
+  if paused then return end
+
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
     self.piece.y = self.piece.y + (dt * match.speed * 2)
