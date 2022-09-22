@@ -111,35 +111,114 @@ function match:newPiece()
   self.piece.y = 0---dims.tile_size
 end
 
+function match:checkForExplosion(piece,x,y)
+  local type = piece
+  local checkingFor = type == 'bomb' and 'spark' or 'bomb'
+
+  local volatileNeighbours = {}
+  -- up
+  if y > 0 and self.filled[''..x..'-'..(y-1)] == checkingFor then
+    table.insert(volatileNeighbours,{x,y-1})
+    --self.filled[x,y-1] = nil
+  end
+  -- down
+  if y < dims.height and self.filled[''..x..'-'..(y+1)] == checkingFor then
+    table.insert(volatileNeighbours,{x,y+1})
+    --self.filled[x,y+1] = nil
+  end
+  -- left
+  if x > 0 and self.filled[''..(x-1)..'-'..y] == checkingFor then
+    table.insert(volatileNeighbours,{x-1,y})
+    --self.filled[x-1,y] = nil
+  end
+  -- right
+  if x < dims.width and self.filled[''..(x+1)..'-'..y] == checkingFor then
+    table.insert(volatileNeighbours,{x+1,y})
+    --self.filled[x+1,y] = nil
+  end
+
+  -- if there are any volatileNeighbours, then 
+  if #volatileNeighbours > 0 then
+    table.insert(volatileNeighbours,{x,y})
+  end
+
+  return (#volatileNeighbours > 0), volatileNeighbours
+
+  -- Should bombs cause a chain reaction?
+  -- should exploded blocks cause blocks to drop?
+end
+
 function match:placePiece()
   local gameOver = false
+  local exploded = {}
   -- Consider refactoring
   if self.piece.tl then
     local x = math.floor(self.piece.x/dims.tile_size)-1
     local y = math.floor(self.piece.y/dims.tile_size)-1
     match.filled[''..x..'-'..y] = self.piece.tl
+    if self.piece.tl == 'bomb' or self.piece.tl == 'spark' then
+      local detectedExplosion, explosions = match:checkForExplosion(self.piece.tl,x,y)
+      if detectedExplosion then
+        table.insert(exploded,explosions)
+      end
+    end
   end
   if self.piece.tr then
     local x = math.floor(self.piece.x/dims.tile_size)
     local y = math.floor(self.piece.y/dims.tile_size)-1
     match.filled[''..x..'-'..y] = self.piece.tr
+    if self.piece.tr == 'bomb' or self.piece.tr == 'spark' then
+      local detectedExplosion, explosions = match:checkForExplosion(self.piece.tr,x,y)
+      if detectedExplosion then
+        table.insert(exploded,explosions)
+      end
+    end
   end
   if self.piece.bl then
     local x = math.floor(self.piece.x/dims.tile_size)-1
     local y = math.floor(self.piece.y/dims.tile_size)
     match.filled[''..x..'-'..y] = self.piece.bl
 
-    if y <= 1 then gameOver = true end
+    if self.piece.bl == 'bomb' or self.piece.bl == 'spark' then
+      local detectedExplosion, explosions = match:checkForExplosion(self.piece.bl,x,y)
+      if detectedExplosion then
+        table.insert(exploded,explosions)
+      end
+    end
   end
   if self.piece.br then
     local x = math.floor(self.piece.x/dims.tile_size)
     local y = math.floor(self.piece.y/dims.tile_size)
     match.filled[''..x..'-'..y] = self.piece.br
 
-    if y <= 1 then gameOver = true end
+    if self.piece.br == 'bomb' or self.piece.br == 'spark' then
+      local detectedExplosion, explosions = match:checkForExplosion(self.piece.br,x,y)
+      if detectedExplosion then
+        table.insert(exploded,explosions)
+      end
+    end
+  end
+
+  for i,explosion in ipairs(exploded) do
+    -- TODO - setup explosions here
+    -- for now, remove bomb and spark
+    -- eventually swap for explosion tile, then _that_ should clear around, etc
+
+    -- explosion is a table
+    for ii,_explosion in ipairs(explosion) do
+      local x = _explosion[1]
+      local y = _explosion[2]
+      match.filled[''..x..'-'..y] = nil
+    end
   end
 
   sfx.land:play()
+
+  -- check for game over
+  -- should happen after explosions, in case that saves it?
+  -- (currently can't)
+  local y = math.floor(self.piece.y/dims.tile_size)
+  if y <= 1 then gameOver = true end
 
   -- TODO: proper game end (freeze then callback?)
   if gameOver then self:init() end
