@@ -50,6 +50,12 @@ function piece:randomise()
   if hasBomb then
     pieces[math.random(1,count)] = 'bomb'
   end
+  -- mutually exclusive?
+  --  appears about 1/10 times
+  local hasSpark = roll >= 0.2 and roll < 0.3
+  if hasSpark then
+    pieces[math.random(1,count)] = 'spark'
+  end
 
   self.tl = pieces[1] == nil and false or pieces[1]
   self.tr = pieces[2] == nil and false or pieces[2]

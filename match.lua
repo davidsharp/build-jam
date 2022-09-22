@@ -39,6 +39,7 @@ function match:init()
   tileMap = {
     brick = {sheet=tiles,quad=getTile(tiles,11,19)},
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
+    spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
     null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
   }
 end
