@@ -203,6 +203,8 @@ function match:placePiece()
     end
   end
 
+  -- TODO! Re-check for explosions when a line has been cleared!
+
   for i,explosion in ipairs(exploded) do
     -- TODO - setup explosions here
     -- for now, remove bomb and spark
