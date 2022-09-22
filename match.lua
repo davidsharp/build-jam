@@ -42,6 +42,8 @@ function match:init()
     spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
     -- TODO - this might be multi-phase, or calculated elsewhere?
     explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
+    -- temp
+    dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,12)},
     null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
   }
 end
@@ -214,11 +216,7 @@ function match:placePiece()
     end
   end
   if #exploded > 0 then
-    -- Now freeze the game
-    frozen = true
-    Timer.after(0.5,function() frozen = false end)
-    -- Blow up outer (remove squares, set co-ords to be animated)
-    -- Handle chain?
+    self:explodeExplosions()
   end
 
   -- give bombs gravity?
@@ -234,6 +232,69 @@ function match:placePiece()
 
   -- TODO: proper game end (freeze then callback?)
   if gameOver then self:init() end
+end
+
+function match:explodeExplosions()
+  -- Now freeze the game
+  frozen = true
+  local explosions = self:findExplosions()
+  -- TODO sound
+  local dust = {}
+  local chainReaction = false
+  -- Blow up outer (remove squares, set co-ords to be animated)
+  for i,exp in ipairs(explosions) do
+    local x = exp.x
+    local y = exp.y
+    print(x,y)
+    -- up
+    if y > 0 and self.filled[''..x..'-'..(y-1)] then
+      self.filled[''..x..'-'..(y-1)] = 'dust'
+      table.insert(dust,{x=x,y=y-1})
+    end
+    -- down
+    if y < dims.height and self.filled[''..x..'-'..(y+1)] then
+      self.filled[''..x..'-'..(y+1)] = 'dust'
+      table.insert(dust,{x=x,y=y+1})
+    end
+    -- left
+    if x > 0 and self.filled[''..(x-1)..'-'..y] then
+      self.filled[''..(x-1)..'-'..y] = 'dust'
+      table.insert(dust,{x=x-1,y=y})
+    end
+    -- right
+    if x < dims.width and self.filled[''..(x+1)..'-'..y] then
+      self.filled[''..(x+1)..'-'..y] = 'dust'
+      table.insert(dust,{x=x+1,y=y})
+    end
+  end
+
+  Timer.after(0.5, function()
+    -- TODO sound
+    for i,exp in ipairs(explosions) do
+      self.filled[''..exp.x..'-'..exp.y] = nil
+    end
+    for i,exp in ipairs(dust) do
+      self.filled[''..exp.x..'-'..exp.y] = nil
+    end
+  end)
+
+  -- Handle chain?
+
+  -- done
+  Timer.after(1, function() frozen = false end)
+end
+
+function match:findExplosions()
+  local explosions = {}
+  for key,value in pairs(self.filled) do
+    if value == 'explosion' then
+      print(key,value)
+      local coords = split(key,'-')
+      print(coords[1],coords[2])
+      table.insert(explosions,{x = tonumber(coords[1]),y = tonumber(coords[2])})
+    end
+  end
+  return explosions
 end
 
 -- accept an arbitrary number of rows?
