@@ -212,6 +212,8 @@ function match:placePiece()
     end
   end
 
+  -- give bombs gravity?
+
   sfx.land:play()
 
   -- check for game over

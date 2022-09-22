@@ -1,5 +1,52 @@
 piece = {}
 
+piecePool = {
+  pieces = {},
+  bombs = {}
+}
+
+function replenishPool()
+  piecePool.pieces = {2,2,3,3,3,3,4,4,4,4}
+  piecePool.bombs = {false,false,false,false,false,false,false,'bomb','bomb','spark'}
+end
+function pieceFromPool()
+  if #(piecePool.pieces) == 0 then
+    replenishPool()
+  end
+  local count = table.remove(piecePool.pieces,math.random(1,#(piecePool.pieces)))
+  local special = table.remove(piecePool.bombs,math.random(1,#(piecePool.bombs)))
+
+  local pieces = {'','','',''}
+
+  local offset = math.random(0,3)
+
+  -- to start, set everything as bricks
+  for i, piece in ipairs(pieces) do
+    if i <= count then
+      pieces[i] = 'brick'
+    else pieces[i] = nil end
+  end
+
+  -- lack of special is just a 'brick' for now
+  if special then
+    pieces[math.random(1,count)] = special
+  end
+
+  local temp = {}
+  temp.tl = pieces[1] == nil and false or pieces[1]
+  temp.tr = pieces[2] == nil and false or pieces[2]
+  temp.bl = pieces[3] == nil and false or pieces[3]
+  temp.br = pieces[4] == nil and false or pieces[4]
+
+  temp = piece:new({from = temp})
+
+  for i = 0, offset do
+    temp:rotateLeft()
+  end
+
+  return temp
+end
+
 function piece:new(o)
   o = o or {}
 
@@ -18,7 +65,8 @@ function piece:new(o)
     o.bl = o.from.bl
     o.br = o.from.br
   else
-    self:randomise()
+    --self:randomise()
+    o = pieceFromPool()
   end
 
   return o
