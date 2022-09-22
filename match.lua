@@ -213,6 +213,7 @@ function match:placePiece()
   end
 
   -- give bombs gravity?
+  -- maybe bombs shouldn't clear?
 
   sfx.land:play()
 
