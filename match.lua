@@ -40,6 +40,8 @@ function match:init()
     brick = {sheet=tiles,quad=getTile(tiles,11,19)},
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
     spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
+    -- TODO - this might be multi-phase, or calculated elsewhere?
+    explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
     null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
   }
 end
@@ -208,8 +210,12 @@ function match:placePiece()
     for ii,_explosion in ipairs(explosion) do
       local x = _explosion[1]
       local y = _explosion[2]
-      match.filled[''..x..'-'..y] = nil
+      match.filled[''..x..'-'..y] = 'explosion'
     end
+
+    -- Now freeze the game
+    -- Blow up outer (remove squares, set co-ords to be animated)
+    -- Handle chain?
   end
 
   -- give bombs gravity?
