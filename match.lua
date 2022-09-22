@@ -245,7 +245,6 @@ function match:explodeExplosions()
   for i,exp in ipairs(explosions) do
     local x = exp.x
     local y = exp.y
-    print(x,y)
     -- up
     if y > 0 and self.filled[''..x..'-'..(y-1)] then
       self.filled[''..x..'-'..(y-1)] = 'dust'
@@ -278,7 +277,7 @@ function match:explodeExplosions()
     end
   end)
 
-  -- Handle chain?
+  -- TODO ~ Handle chain?
 
   -- done
   Timer.after(1, function() frozen = false end)
@@ -288,9 +287,7 @@ function match:findExplosions()
   local explosions = {}
   for key,value in pairs(self.filled) do
     if value == 'explosion' then
-      print(key,value)
       local coords = split(key,'-')
-      print(coords[1],coords[2])
       table.insert(explosions,{x = tonumber(coords[1]),y = tonumber(coords[2])})
     end
   end
