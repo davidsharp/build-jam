@@ -59,7 +59,7 @@ function match:update(dt)
   end
 
 
-  if paused then return end
+  if paused or frozen then return end
 
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
@@ -212,8 +212,11 @@ function match:placePiece()
       local y = _explosion[2]
       match.filled[''..x..'-'..y] = 'explosion'
     end
-
+  end
+  if #exploded > 0 then
     -- Now freeze the game
+    frozen = true
+    Timer.after(0.5,function() frozen = false end)
     -- Blow up outer (remove squares, set co-ords to be animated)
     -- Handle chain?
   end
