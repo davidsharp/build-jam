@@ -317,6 +317,8 @@ function match:draw(x,y)
     end
   end
 
+  love.graphics.rectangle("line",x + self.piece.x-16,y + self.piece.y-16,32,32)
+  love.graphics.rectangle("fill",x + self.piece.x-2,y + self.piece.y-2,4,4)
   drawPiece(self.piece,x,y)
   if dialog then dialog:draw() end
 end
