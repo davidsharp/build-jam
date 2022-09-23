@@ -8,6 +8,7 @@ function dialogue:new(o)
   o.index = 1
   o.boxIndex = 1
   o.callback = o.callback or function() print('no callback on "'..o.text[1]..'"')  end
+  o.face = nil
 
   setmetatable(o, self)
   self.__index = self
@@ -60,13 +61,17 @@ function dialogue:update(dt)
           -- only run callback once
           self.callback = nil
 
-          self:hide()
+          self:hide() -- maybe callback should be run on hide
         end
       end
     end
   end
 end
 
+-- should be a certain height near the bottom
 function dialogue:draw()
   love.graphics.print(self.display,1,1)
+  if string.len(self.display) == string.len(self.text[self.boxIndex]) then
+    love.graphics.print('[press space to continue]',1,16)
+  end
 end
