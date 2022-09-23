@@ -3,7 +3,7 @@ dialogue = {}
 function dialogue:new(o)
   o = o or {}
 
-  o.text = o.text or {'test test test'}
+  o.text = o.text or {'This is example dialogue!'}
   o.display = ''
   o.index = 1
 
@@ -12,6 +12,8 @@ function dialogue:new(o)
   --self.__tostring = function() return 'dialogue{'..o.id..'}' end
 
   if o.parse then self:parse(o.parse) end
+
+  Timer.every(.1, function() o:write() end)
 
   return o
 end
@@ -41,11 +43,11 @@ end
 -- each .1 seconds write a letter, PoC
 local secondCount = 0
 function dialogue:update(dt)
-  secondCount = secondCount + dt
+  --[[secondCount = secondCount + dt
   if secondCount > .1 and string.len(self.display)<self.index then
     self:write()
     secondCount = secondCount % .1
-  end
+  end]]
   -- if string.len > index then activate "next behaviour"
 end
 
