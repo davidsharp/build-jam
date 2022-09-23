@@ -3,9 +3,11 @@ dialogue = {}
 function dialogue:new(o)
   o = o or {}
 
-  o.text = o.text or {'This is example dialogue!'}
+  o.text = o.text or {'This is example dialogue!','This is more example dialogue...'}
   o.display = ''
   o.index = 1
+  o.boxIndex = 1
+  o.callback = o.callback or function() print('no callback on "'..o.text[1]..'"')  end
 
   setmetatable(o, self)
   self.__index = self
@@ -36,19 +38,33 @@ function dialogue:next()
 end
 
 function dialogue:write()
-  self.display = string.sub(self.text[1],1,self.index)
+  self.display = string.sub(self.text[self.boxIndex],1,self.index)
   self.index = self.index + 1
 end
 
 -- each .1 seconds write a letter, PoC
 local secondCount = 0
 function dialogue:update(dt)
-  --[[secondCount = secondCount + dt
-  if secondCount > .1 and string.len(self.display)<self.index then
-    self:write()
-    secondCount = secondCount % .1
-  end]]
-  -- if string.len > index then activate "next behaviour"
+  if love.keyboard.isDown('space') then
+    -- if text is completed
+    if string.len(self.display) == string.len(self.text[self.boxIndex]) then
+      -- if there's another text box
+      if self.text[self.boxIndex+1] then
+        self.boxIndex = self.boxIndex + 1
+        self.display = ''
+        self.index = 1
+      -- otherwise fire callback
+      else
+        if self.callback then
+          self.callback()
+          -- only run callback once
+          self.callback = nil
+
+          self:hide()
+        end
+      end
+    end
+  end
 end
 
 function dialogue:draw()
