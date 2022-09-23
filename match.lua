@@ -104,6 +104,9 @@ function match:update(dt)
     self:checkLine(row-1)
     self:checkLine(row)
 
+    local explosions = match:findExplosions()
+    if #explosions > 0 then match:explodeExplosions() end
+
     -- TODO: reward removal of two rows?
   end
 end
@@ -315,7 +318,14 @@ function match:clearLine(row)
   -- move blocks above line down
   for r = row-1,0,-1 do
     for c = 0,dims.width do
-      self.filled[''..c..'-'..r+1]  = self.filled[''..c..'-'..r] 
+      -- check for explosions!
+      if (self.filled[''..c..'-'..r] == 'bomb' or self.filled[''..c..'-'..r] == 'spark')
+        and self.filled[''..c..'-'..r+2] == (self.filled[''..c..'-'..r] == 'bomb' and 'spark' or 'bomb') then
+        self.filled[''..c..'-'..r+1] = 'explosion'
+        self.filled[''..c..'-'..r+2] = 'explosion'
+      else
+        self.filled[''..c..'-'..r+1]  = self.filled[''..c..'-'..r]
+      end
       self.filled[''..c..'-'..r] = nil
     end
   end
