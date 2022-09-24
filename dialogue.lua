@@ -10,6 +10,8 @@ function dialogue:new(o)
   o.callback = o.callback or function() print('no callback on "'..o.text[1]..'"')  end
   o.face = nil
 
+  pressToContinue = pressToContinue or love.graphics.newText(font, '[press space to continue]')
+
   setmetatable(o, self)
   self.__index = self
   --self.__tostring = function() return 'dialogue{'..o.id..'}' end
@@ -75,6 +77,7 @@ function dialogue:draw(x,y)
   box(x,y,10,2)
   love.graphics.print(self.display,x,y)
   if string.len(self.display) == string.len(self.text[self.boxIndex]) then
-    love.graphics.print('[press space to continue]',x,y+16)
+    -- TODO - move to bottom of box (draw over border and give a background)
+    love.graphics.draw(pressToContinue,x,y+16)
   end
 end
