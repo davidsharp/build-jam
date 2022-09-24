@@ -394,15 +394,34 @@ function match:draw(x,y)
   for i=0, dims.width do
     for j=0, dims.height do
       if self.filled[''..i..'-'..j] then
-        love.graphics.draw(tileMap[self.filled[''..i..'-'..j]].sheet,tileMap[self.filled[''..i..'-'..j]].quad,x+(i*dims.tile_size),y+(j*dims.tile_size))
+        love.graphics.draw(
+          tileMap[self.filled[''..i..'-'..j]].sheet,
+          tileMap[self.filled[''..i..'-'..j]].quad,
+          x+(i*dims.tile_size),
+          y+(j*dims.tile_size))
       end
     end
   end
 
-  love.graphics.rectangle("line",x + self.piece.x-18,y + self.piece.y-18,36,36)
-  love.graphics.rectangle("fill",x + self.piece.x-2,y + self.piece.y-2,4,4)
+  --love.graphics.rectangle("line",x + self.piece.x-18,y + self.piece.y-18,36,36)
+  --love.graphics.rectangle("fill",x + self.piece.x-2,y + self.piece.y-2,4,4)
   drawPiece(self.piece,x,y)
+  drawCurrentBorder(self.piece,x,y)
+
   if dialog then dialog:draw() end
+end
+
+function drawCurrentBorder(piece,x,y)
+  pieceBorderQuads = pieceBorderQuads or {
+    love.graphics.newQuad(35 * 16, 12 * 16, 8, 8, k_tiles_trans),
+    love.graphics.newQuad(35.5 * 16, 12.5 * 16, 8, 8, k_tiles_trans),
+    love.graphics.newQuad(35.5 * 16, 12 * 16, 8, 8, k_tiles_trans),
+    love.graphics.newQuad(35 * 16, 12.5 * 16, 8, 8, k_tiles_trans),
+  }
+  love.graphics.draw(k_tiles_trans, pieceBorderQuads[1], x + piece.x - 20, y + piece.y - 20)
+  love.graphics.draw(k_tiles_trans, pieceBorderQuads[2], x + piece.x + 12, y + piece.y + 12)
+  love.graphics.draw(k_tiles_trans, pieceBorderQuads[3], x + piece.x + 12, y + piece.y - 20)
+  love.graphics.draw(k_tiles_trans, pieceBorderQuads[4], x + piece.x - 20, y + piece.y + 12)
 end
 
 function drawPiece(p,x,y)
