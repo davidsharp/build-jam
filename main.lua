@@ -29,6 +29,11 @@ function love.load()
   sfx.explode:setVolume(0.4)
   sfx.clear:setVolume(0.3)
 
+  music = {
+    game = love.audio.newSource( 'assets/JDSherbett/JDSherbert - Minigame Music Pack - Corrupted Circuitry.ogg', 'stream')
+  }
+  music.game:setVolume(0.5)
+
   menuScene.set()
 end
 
