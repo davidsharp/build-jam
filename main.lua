@@ -3,6 +3,7 @@ Timer = require 'libraries/hump/timer'
 require 'menu-scene'
 require 'match-scene'
 require 'util'
+require 'box'
 
 gameState = {
   scene = "menu"

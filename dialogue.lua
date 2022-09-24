@@ -69,9 +69,12 @@ function dialogue:update(dt)
 end
 
 -- should be a certain height near the bottom
-function dialogue:draw()
-  love.graphics.print(self.display,1,1)
+function dialogue:draw(x,y)
+  local x = x or 180
+  local y = y or 100
+  box(x,y,10,2)
+  love.graphics.print(self.display,x,y)
   if string.len(self.display) == string.len(self.text[self.boxIndex]) then
-    love.graphics.print('[press space to continue]',1,16)
+    love.graphics.print('[press space to continue]',x,y+16)
   end
 end
