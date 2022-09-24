@@ -20,9 +20,13 @@ function love.load()
   k_tiles_trans = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
 
   sfx = {
-    land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static')
+    land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static'),
+    explode = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Hurt01.wav', 'static'),
+    clear = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Pickup01.wav', 'static'),
   }
   sfx.land:setVolume(0.4)
+  sfx.explode:setVolume(0.4)
+  sfx.clear:setVolume(0.3)
 
   menuScene.set()
 end

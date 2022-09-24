@@ -206,12 +206,10 @@ function match:placePiece()
     end
   end
 
-  -- TODO! Re-check for explosions when a line has been cleared!
-
   for i,explosion in ipairs(exploded) do
-    -- TODO - setup explosions here
-    -- for now, remove bomb and spark
+    -- removes bomb and spark
     -- eventually swap for explosion tile, then _that_ should clear around, etc
+    -- TODO - refactor this loop away
 
     -- explosion is a table
     for ii,_explosion in ipairs(explosion) do
@@ -243,7 +241,7 @@ function match:explodeExplosions()
   -- Now freeze the game
   frozen = true
   local explosions = self:findExplosions()
-  -- TODO sound
+  sfx.explode:play()
   local dust = {}
   local chainReaction = false
   -- Blow up outer (remove squares, set co-ords to be animated)
@@ -273,7 +271,7 @@ function match:explodeExplosions()
   end
 
   Timer.after(0.5, function()
-    -- TODO sound
+    sfx.explode:play()
     for i,exp in ipairs(explosions) do
       self.filled[''..exp.x..'-'..exp.y] = nil
     end
@@ -331,6 +329,8 @@ function match:clearLine(row)
   end
   -- TODO, freeze, blink?, then move
   self.lines = self.lines + 1
+
+  sfx.clear:play()
 end
 
 function match:rotatePiece()
