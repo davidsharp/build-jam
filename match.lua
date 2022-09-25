@@ -53,13 +53,6 @@ function match:update(dt)
 
   if dialog then dialog:update(dt) end
 
-  -- only pauses while held (little test)
-  if love.keyboard.isDown('p') then
-    paused = true
-  else
-    paused = false
-  end
-
   -- tween the volume for fade?
   if paused or frozen then music.game:pause() else music.game:play() end
 
@@ -377,6 +370,10 @@ function match:keypressed(key)
     self.piece:rotateLeft()
   elseif key == 'd' then
     self.piece:rotateRight()
+  end
+
+  if key == 'p' then
+    paused = not paused
   end
 
   -- debug, refresh
