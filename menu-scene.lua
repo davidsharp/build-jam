@@ -1,3 +1,6 @@
+-- this splash screen should have a few options
+-- and maybe show progress through the building being built
+
 menuScene = {}
 
 function menuScene.set()
