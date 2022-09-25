@@ -47,7 +47,9 @@ function matchScene.draw()
   love.graphics.print("next",48 + (10*16), 48-32)
   drawPiece(gameState.match.next,48 + (11*16), 48)
 
+  --love.graphics.print("time:"..gameState.match.lines,48 + (10*16), 48+16)
   love.graphics.print("floors:"..gameState.match.lines,48 + (10*16), 48+32)
+  love.graphics.print("target:"..gameState.match.target,48 + (10*16), 48+32+16)
 end
 
 function matchScene.keypressed(key)

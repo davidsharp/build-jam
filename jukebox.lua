@@ -28,7 +28,7 @@ function jukebox.switchTrack(to)
   Timer.tween(1, volumes, {
     game = (to == 'game' and 0.5 or 0.0),
     goofy = (to == 'goofy' and 0.5 or 0.0)
-  }, 'in-out-quad')
+  }, 'linear')
   --[[
   if currentTrack then jukebox.fadeOut(currentTrack) end
   jukebox.fadeIn(to)

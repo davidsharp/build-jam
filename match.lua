@@ -20,6 +20,7 @@ function match:new(o)
 
     --o.score = 0
     o.lines = 0
+    o.target = o.target or 10
 
     setmetatable(o, self)
     self.__index = self
@@ -34,7 +35,7 @@ function match:init()
   match:newPiece()
   match.filled = {}
 
-  dialog = dialogue:new()
+  --dialog = dialogue:new()
 
   tileMap = {
     brick = {sheet=tiles,quad=getTile(tiles,11,19)},
