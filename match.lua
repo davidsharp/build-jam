@@ -46,6 +46,8 @@ function match:init()
     dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,12)},
     null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
   }
+
+  jukebox.start('game')
 end
 
 function match:update(dt)
@@ -54,7 +56,7 @@ function match:update(dt)
   if dialog then dialog:update(dt) end
 
   -- tween the volume for fade?
-  if paused or frozen then music.game:pause() else music.game:play() end
+  --if paused or frozen then music.game:pause() else music.game:play() end
 
   if paused or frozen then return end
 
@@ -374,6 +376,12 @@ function match:keypressed(key)
 
   if key == 'p' then
     paused = not paused
+  end
+
+  -- testing music switching
+  if key == 'm' then
+    jukebox.switchTrack('goofy')
+    --jukebox.fadeOut(currentTrack)
   end
 
   -- debug, refresh

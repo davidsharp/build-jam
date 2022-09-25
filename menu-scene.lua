@@ -18,6 +18,7 @@ function menuScene.update(dt)
   math.random()
 
   Timer.update(dt)
+  jukebox.update(dt)
 end
 
 function menuScene.draw()

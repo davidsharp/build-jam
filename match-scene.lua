@@ -25,7 +25,7 @@ function matchScene.update(dt)
   if not gameState.match then return end
   gameState.match:update(dt)
 
-  --love.audio.play(music.game)
+  jukebox.update(dt)
 end
 
 function matchScene.draw()
