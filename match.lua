@@ -60,6 +60,8 @@ function match:update(dt)
     paused = false
   end
 
+  -- tween the volume for fade?
+  if paused or frozen then music.game:pause() else music.game:play() end
 
   if paused or frozen then return end
 
