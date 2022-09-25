@@ -15,7 +15,7 @@ end
 
 function jukebox.start(track)
   if track then
-    volumes[track] = 0.5
+    volumes[track] = gameState.maxVolume
     music[track]:stop()
     music[track]:play()
     currentTrack = currentTrack or track
@@ -26,8 +26,8 @@ end
 function jukebox.switchTrack(to)
   currentTrack = to
   Timer.tween(1, volumes, {
-    game = (to == 'game' and 0.5 or 0.0),
-    goofy = (to == 'goofy' and 0.5 or 0.0)
+    game = (to == 'game' and gameState.maxVolume or 0.0),
+    goofy = (to == 'goofy' and gameState.maxVolume or 0.0)
   }, 'linear')
   --[[
   if currentTrack then jukebox.fadeOut(currentTrack) end

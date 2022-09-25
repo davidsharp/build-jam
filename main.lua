@@ -7,7 +7,11 @@ require 'box'
 require 'jukebox'
 
 gameState = {
-  scene = "menu"
+  scene = "menu",
+  maxVolume = 0.5,
+  -- TODO - set/update Music/SFX volume
+  musicVolume = 1.0,
+  sfxVolume = 1.0
 }
 
 function love.load()
