@@ -6,6 +6,7 @@ require 'match-scene'
 require 'overworld-scene'
 require 'util'
 require 'box'
+require 'player'
 require 'jukebox'
 
 gameState = {

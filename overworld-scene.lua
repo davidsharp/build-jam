@@ -21,16 +21,20 @@ end
 function overworldScene.load()
   jukebox.switchTrack('goofy')
   map = sti('maps/room.lua')
+
+  player = player:new()
 end
 
 function overworldScene.update(dt)
   Timer.update(dt)
   jukebox.update(dt)
+  player:update(dt)
 end
 
 function overworldScene.draw()
   love.graphics.scale(2)
   map:draw(60,60,2,2)
+  player:draw(60,60)
 end
 
 function overworldScene.keypressed(key)
