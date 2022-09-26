@@ -32,7 +32,7 @@ function menuScene.draw()
   love.graphics.scale(2)
   love.graphics.print("press enter to start",50,50)
 
-  map:draw(60,60)
+  map:draw(60,60,2,2)
 end
 
 function menuScene.keypressed(key)
