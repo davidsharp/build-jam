@@ -13,10 +13,16 @@ function player:new(o)
       up = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Idle U.png'),
       right = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Idle R.png'),
       down = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Idle D.png')
+    },
+    walking = {
+      up = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Walk U.png'),
+      right = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Walk R.png'),
+      down = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Walk D.png')
     }
   }
   -- left is just right mirrored
   o.sprites.standing.left = o.sprites.standing.right
+  o.sprites.walking.left = o.sprites.walking.right
   o.sprites.standingQuads = {
     up = love.graphics.newQuad(0, 0, 16, 16, o.sprites.standing.up),
     right = love.graphics.newQuad(0, 0, 16, 16, o.sprites.standing.right),
@@ -37,9 +43,23 @@ function player:draw(x,y)
   -- math.floor(o.frame/4) -- something _like_ this
 
   local flipX = self.direction == 'left'
-  love.graphics.draw(
-    self.sprites.standing[self.direction],self.sprites.standingQuads[self.direction],
-    self.position.x+x+(flipX and 16 or 0),self.position.y+y,0,flipX and -1 or 1,1)
+  if self.moving then
+    local quad = love.graphics.newQuad(
+      math.floor(self.frame % 4) * 16, 0, 16, 16,
+      self.sprites.walking[self.direction]
+    )
+    love.graphics.draw(
+      self.sprites.walking[self.direction],quad,
+      self.position.x+x+(flipX and 16 or 0),self.position.y+y,0,flipX and -1 or 1,1
+    )
+
+    -- TODO, flip down/up too after every cycle
+  else
+    love.graphics.draw(
+      self.sprites.standing[self.direction],self.sprites.standingQuads[self.direction],
+      self.position.x+x+(flipX and 16 or 0),self.position.y+y,0,flipX and -1 or 1,1
+    )
+  end
 
   --[[
     local quad = love.graphics.newQuad(math.floor(self.frame % frameCount) * self.width, 0, self.width, self.height, sprite)
@@ -69,6 +89,7 @@ function player:update(dt)
       end
 
       if moveDir then
+        self.frame = 0
         self.moving = true
         self.direction = moveDir
         Timer.tween(0.5,self.position,
@@ -81,7 +102,7 @@ function player:update(dt)
 
 
   -- update frame for animation (maybe reset on move)
-  self.frame = self.frame + dt
+  self.frame = self.frame + (dt * 5)
 end
 
 function player:move(x,y)
