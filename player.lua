@@ -89,14 +89,35 @@ function player:update(dt)
       end
 
       if moveDir then
+        local collision = nil
+        if colliders then
+          -- colliders might be null, so use pairs > ipairs
+          for i,collider in pairs(colliders) do
+            --map:convertPixelToTile(self.position.x + moveBy.x,self.position.y + moveBy.y)
+            if collider.position.x == (self.position.x + moveBy.x) and
+            collider.position.y == (self.position.y + moveBy.y) then
+              collision = collider
+              print('collided!')
+            end
+          end
+        end
         self.frame = 0
         self.moving = true
         self.direction = moveDir
-        Timer.tween(0.5,self.position,
+        if collision and collision.solid then
+          -- don't move and activate callback
+          -- consider action button instead?
+          collision.callback()
+          Timer.after(0.2,function() self.moving = false end)
+        else Timer.tween(0.5,self.position,
           {x=(self.position.x + moveBy.x),y=(self.position.y + moveBy.y)},
           'linear',
-          function() self.moving = false end
+          function()
+            self.moving = false
+            if collision then collision.callback() end
+          end
         )
+        end
       end
   end
 

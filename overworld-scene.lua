@@ -2,6 +2,8 @@
 --   but basically a description for the non-puzzle portion
 --  show current room, intro "cutscene" possibly also lives here
 
+-- TODO, fix bug where going back from game to map crashes
+
 overworldScene = {
   floor = 0,
   floors = 0,
@@ -28,12 +30,19 @@ end
 
 function overworldScene.loadFloor()
   map = sti(overworldScene.floor > overworldScene.floors and 'maps/rooftop.lua' or 'maps/room.lua')
+  print(map:convertPixelToTile(math.floor((5*16)-1), math.floor((6*16)-1)))
 
   -- move player? Probably set in callback
   person = overworldScene.getPerson()
   stairsDown = overworldScene.getStairsDown()
   stairsUp = overworldScene.getStairsUp()
   door = overworldScene.getDoor()
+  colliders = {
+    person,
+    stairsDown,
+    stairsUp,
+    door
+  }
 end
 
 function overworldScene.getPerson()

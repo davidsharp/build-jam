@@ -10,7 +10,7 @@ function item:new(o)
 
   o.tile = o.tile --or {sheet = tiles,quad = getTile(tiles,o.tile_x or 0,o.tile_y or 0)}
   o.solid = o.solid or false
-  o.callback = o.callback or function() end
+  o.callback = o.callback or function() print('collided!') end
 
   setmetatable(o, self)
   self.__index = self
