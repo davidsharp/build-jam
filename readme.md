@@ -14,7 +14,9 @@ A game made for a small jam with friends with the theme **build**. Built in Love
 - draw where the piece will land?
 - port to playdate (after jam?)
 
-### Credits
+### Asset Credits
 
-* Sprites/tiles/SFX are from Canari Games' 1BIT asset pack
+* Sprites/tiles/SFX are from Canari Games' 1BIT asset pack and Kenney's 1-bit asset pack
 * Font is Somepx's Matchup Pro
+* Music is by JDSherbett
+* Dialogue frames are by VectorPixelStar
