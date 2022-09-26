@@ -30,13 +30,6 @@ end
 
 function overworldScene.loadFloor()
   map = sti(overworldScene.floor > overworldScene.floors and 'maps/rooftop.lua' or 'maps/room.lua')
-  print(map:convertPixelToTile(math.floor((5*16)-1), math.floor((6*16)-1)))
-
-  -- this prints properties of the first tile of the map
-  -- TODO, use this for wall collision
-  for k,v in pairs(map.layers[1].data[1][1]) do
-    print(k,v)
-  end
 
   -- move player? Probably set in callback
   person = overworldScene.getPerson()
