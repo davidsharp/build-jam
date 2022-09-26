@@ -10,6 +10,7 @@ A game made for a small jam with friends with the theme **build**. Built in Love
 - move bottom of playfield up gradually?
 - consider dropping unattached pieces?
 - tutorial text, NPCs and unlockable trinkets?
+- player name entry?
 - draw where the piece will land?
 - port to playdate (after jam?)
 
