@@ -4,7 +4,7 @@ function player:new(o)
   o = o or {}
 
   o.position = o.position or {x=0,y=0}
-  o.direction = 'left'--'down'
+  o.direction = 'down'
   o.moving = false
   o.frame = 0
 

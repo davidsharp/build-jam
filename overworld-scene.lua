@@ -31,10 +31,12 @@ function overworldScene.update(dt)
   player:update(dt)
 end
 
+local world_x = 16 * 5
+local world_y = 16*5
 function overworldScene.draw()
   love.graphics.scale(2)
-  map:draw(60,60,2,2)
-  player:draw(60,60)
+  map:draw(world_x,world_y,2,2)
+  player:draw(world_x + (16 * 1),world_y + (16 * 1))
 end
 
 function overworldScene.keypressed(key)
