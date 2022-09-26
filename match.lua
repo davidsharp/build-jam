@@ -22,6 +22,9 @@ function match:new(o)
     o.lines = 0
     o.target = o.target or 10
 
+    o.timeElapsed = 0
+    o.timeToBeat = 60
+
     setmetatable(o, self)
     self.__index = self
     self.__tostring = function() return 'match{'..o.id..'}' end
@@ -59,6 +62,8 @@ function match:update(dt)
   --if paused or frozen then music.game:pause() else music.game:play() end
 
   if paused or frozen then return end
+
+  self.timeElapsed = self.timeElapsed + dt
 
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
