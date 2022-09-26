@@ -25,6 +25,7 @@ end
 
 function jukebox.switchTrack(to)
   local from = currentTrack
+  if to == from then return end
   currentTrack = to
   Timer.tween(1, volumes, {
     game = (to == 'game' and gameState.maxVolume or 0.0),
