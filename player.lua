@@ -53,20 +53,29 @@ function player:update(dt)
   if not self.moving then
       -- on move, tween location to 16 in whichever direction
       local moveDir = nil
-      if love.keyboard.isDown('up') then moveDir = 'up'
-      elseif love.keyboard.isDown('down') then moveDir = 'down'
-      elseif love.keyboard.isDown('left') then moveDir = 'left'
-      elseif love.keyboard.isDown('right') then moveDir = 'right' end
-
-      print(moveDir)
+      local moveBy = {x=0,y=0}
+      if love.keyboard.isDown('up') then
+        moveDir = 'up'
+        moveBy.y = -16
+      elseif love.keyboard.isDown('down') then
+        moveDir = 'down'
+        moveBy.y = 16
+      elseif love.keyboard.isDown('left') then
+        moveDir = 'left'
+        moveBy.x = -16
+      elseif love.keyboard.isDown('right') then
+        moveDir = 'right'
+        moveBy.x = 16
+      end
 
       if moveDir then
-        --self.moving = true
+        self.moving = true
         self.direction = moveDir
-        --Timer.tween(0.5,self.position,
-        --  {x=self.position.x,y=(self.position.y - 16)},
-        --  function() self.moving = false end
-        --)
+        Timer.tween(0.5,self.position,
+          {x=(self.position.x + moveBy.x),y=(self.position.y + moveBy.y)},
+          'linear',
+          function() self.moving = false end
+        )
       end
   end
 
