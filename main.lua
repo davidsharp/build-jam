@@ -3,6 +3,7 @@ sti = require 'libraries/sti'
 
 require 'menu-scene'
 require 'match-scene'
+require 'overworld-scene'
 require 'util'
 require 'box'
 require 'jukebox'
