@@ -1,4 +1,5 @@
 Timer = require 'libraries/hump/timer'
+sti = require 'libraries/sti'
 
 require 'menu-scene'
 require 'match-scene'
