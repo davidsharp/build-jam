@@ -90,10 +90,10 @@ function player:update(dt)
 
       if moveDir then
         local collision = nil
+        local wallCollision = nil
         if colliders then
           -- colliders might be null, so use pairs > ipairs
           for i,collider in pairs(colliders) do
-            --map:convertPixelToTile(self.position.x + moveBy.x,self.position.y + moveBy.y)
             if collider.position.x == (self.position.x + moveBy.x) and
             collider.position.y == (self.position.y + moveBy.y) then
               collision = collider
@@ -101,6 +101,11 @@ function player:update(dt)
             end
           end
         end
+        --local x,y = map:convertPixelToTile(self.position.x + moveBy.x,self.position.y + moveBy.y)
+        local x = ((self.position.x + moveBy.x)/16)+1
+        local y = ((self.position.y + moveBy.y)/16)+1
+        local data = map.layers[1].data
+        wallCollision = (data and data[x] and data[y][x] and data[y][x].gid ~= 0) or false
         self.frame = 0
         self.moving = true
         self.direction = moveDir
@@ -108,6 +113,9 @@ function player:update(dt)
           -- don't move and activate callback
           -- consider action button instead?
           collision.callback()
+          Timer.after(0.2,function() self.moving = false end)
+        -- non-solid collision negates solid walls
+        elseif wallCollision and not collision then
           Timer.after(0.2,function() self.moving = false end)
         else Timer.tween(0.5,self.position,
           {x=(self.position.x + moveBy.x),y=(self.position.y + moveBy.y)},
