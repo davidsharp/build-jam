@@ -14,6 +14,7 @@ end
 
 function matchScene.load()
   gameState.match = match:new()
+  jukebox.switchTrack('game')
 end
 
 function matchScene.update(dt)
@@ -53,6 +54,9 @@ function matchScene.draw()
 end
 
 function matchScene.keypressed(key)
+  if key == 'escape' then
+    menuScene.set()
+  end
   if not gameState.match then return end
   gameState.match:keypressed(key)
 end

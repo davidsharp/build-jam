@@ -24,11 +24,12 @@ function jukebox.start(track)
 end
 
 function jukebox.switchTrack(to)
+  local from = currentTrack
   currentTrack = to
   Timer.tween(1, volumes, {
     game = (to == 'game' and gameState.maxVolume or 0.0),
     goofy = (to == 'goofy' and gameState.maxVolume or 0.0)
-  }, 'linear')
+  }, 'linear',function() if from then music[from]:stop() end end)
   --[[
   if currentTrack then jukebox.fadeOut(currentTrack) end
   jukebox.fadeIn(to)

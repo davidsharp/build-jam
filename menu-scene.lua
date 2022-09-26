@@ -14,6 +14,8 @@ function menuScene.set()
 end
 
 function menuScene.load()
+  -- temporary
+  jukebox.switchTrack('goofy')
 end
 
 function menuScene.update(dt)
