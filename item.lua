@@ -8,8 +8,7 @@ function item:new(o)
   o.moving = false
   o.frame = 0
 
-  o.sprite = nil
-  o.quad = nil
+  o.tile = o.tile --or {sheet = tiles,quad = getTile(tiles,o.tile_x or 0,o.tile_y or 0)}
   o.solid = o.solid or false
   o.callback = o.callback or function() end
 
@@ -21,6 +20,10 @@ function item:new(o)
 end
 
 function item:draw(x,y)
+  love.graphics.draw(
+    self.tile.sheet,self.tile.quad,
+    self.position.x+x,self.position.y+y
+  )
 end
 
 function item:update(dt)

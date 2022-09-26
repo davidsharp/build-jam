@@ -8,6 +8,7 @@ require 'util'
 require 'box'
 require 'player'
 require 'jukebox'
+require 'item'
 
 gameState = {
   scene = "menu",
@@ -27,6 +28,21 @@ function love.load()
   tiles = love.graphics.newImage('assets/1BITCanariPackTopDown/TILESET/PixelPackTOPDOWN1BIT.png')
   k_tiles = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome_packed.png')
   k_tiles_trans = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
+
+  tileMap = {
+    -- match pieces
+    brick = {sheet=tiles,quad=getTile(tiles,11,19)},
+    bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
+    spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
+    explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
+    dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,12)}, --temp, update
+    null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)},
+    -- overworld items
+    stairsUp = {sheet=tiles,quad=getTile(tiles,9,6)},
+    stairsDown = {sheet=tiles,quad=getTile(tiles,9,11)},
+    door = {sheet=tiles, quad=getTile(tiles,0,0)},
+    person = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,0)}
+  }
 
   sfx = {
     land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static'),

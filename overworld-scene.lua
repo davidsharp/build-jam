@@ -22,8 +22,32 @@ function overworldScene.load()
   jukebox.switchTrack('goofy')
   map = sti('maps/room.lua')
 
-  player = player:new()
+  player = player:new({position = {x=16,y=16}})
+  person = overworldScene.getPerson()
 end
+
+function overworldScene.getPerson()
+  if overworldScene.floor == 0 then
+    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  end
+end
+--[[ -- TODO actually implement
+function overworldScene.getStairsUp()
+  if overworldScene.floor == 0 then
+    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  end
+end
+function overworldScene.getStairsDown()
+  if overworldScene.floor == 0 then
+    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  end
+end
+function overworldScene.getDoor()
+  if overworldScene.floor == 0 then
+    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  end
+end
+]]
 
 function overworldScene.update(dt)
   Timer.update(dt)
@@ -36,7 +60,8 @@ local world_y = 16*5
 function overworldScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
-  player:draw(world_x + (16 * 1),world_y + (16 * 1))
+  person:draw(world_x,world_y)
+  player:draw(world_x,world_y)
 end
 
 function overworldScene.keypressed(key)
