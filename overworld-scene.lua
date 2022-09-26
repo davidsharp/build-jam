@@ -20,34 +20,45 @@ end
 
 function overworldScene.load()
   jukebox.switchTrack('goofy')
-  map = sti('maps/room.lua')
+  player = player:new({position = {x=5*16,y=6*16}})
+  player.direction = 'up'
 
-  player = player:new({position = {x=16,y=16}})
+  overworldScene.loadFloor()
+end
+
+function overworldScene.loadFloor()
+  map = sti(overworldScene.floor > overworldScene.floors and 'maps/rooftop.lua' or 'maps/room.lua')
+
+  -- move player? Probably set in callback
   person = overworldScene.getPerson()
+  stairsDown = overworldScene.getStairsDown()
+  stairsUp = overworldScene.getStairsUp()
+  door = overworldScene.getDoor()
 end
 
 function overworldScene.getPerson()
-  if overworldScene.floor == 0 then
-    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  -- TODO - add more people
+  if true then
+    return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true})
   end
 end
---[[ -- TODO actually implement
+
 function overworldScene.getStairsUp()
-  if overworldScene.floor == 0 then
-    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  if overworldScene.floor <= overworldScene.floors then
+    return item:new({tile = tileMap['stairsUp'],position = {x=1*16,y=1*16}})
   end
 end
 function overworldScene.getStairsDown()
-  if overworldScene.floor == 0 then
-    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+  if overworldScene.floor > 0 then
+    return item:new({tile = tileMap['stairsDown'],position = {x=8*16,y=5*16}})
   end
 end
 function overworldScene.getDoor()
   if overworldScene.floor == 0 then
-    return item:new({tile = tileMap['person'],position = {x=16,y=16}})
+    return item:new({tile = tileMap['door'],position = {x=5*16,y=6*16}})
   end
 end
-]]
+
 
 function overworldScene.update(dt)
   Timer.update(dt)
@@ -60,10 +71,20 @@ local world_y = 16*5
 function overworldScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
-  person:draw(world_x,world_y)
+  love.graphics.print('Floor '..(overworldScene.floor == 0 and 'G' or overworldScene.floor),16,16)
+  if person then person:draw(world_x,world_y) end
+  if stairsDown then stairsDown:draw(world_x,world_y) end
+  if stairsUp then stairsUp:draw(world_x,world_y) end
+  if door then door:draw(world_x,world_y) end
+
   player:draw(world_x,world_y)
 end
 
 function overworldScene.keypressed(key)
+  -- testing floor logic
+  if key == 'space' then
+    overworldScene.floor = overworldScene.floors + 1
+    overworldScene.loadFloor()
+  end
 end
 

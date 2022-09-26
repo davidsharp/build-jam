@@ -40,7 +40,7 @@ function love.load()
     -- overworld items
     stairsUp = {sheet=tiles,quad=getTile(tiles,9,6)},
     stairsDown = {sheet=tiles,quad=getTile(tiles,9,11)},
-    door = {sheet=tiles, quad=getTile(tiles,0,0)},
+    door = {sheet=tiles, quad=getTile(tiles,1,0)},
     person = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,0)}
   }
 
