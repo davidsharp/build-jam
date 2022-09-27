@@ -40,17 +40,6 @@ function match:init()
 
   --dialog = dialogue:new()
 
-  tileMap = {
-    brick = {sheet=tiles,quad=getTile(tiles,11,19)},
-    bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
-    spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
-    -- TODO - this might be multi-phase, or calculated elsewhere?
-    explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
-    -- temp
-    dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,12)},
-    null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)}
-  }
-
 end
 
 function match:update(dt)
@@ -64,6 +53,8 @@ function match:update(dt)
   if paused or frozen then return end
 
   self.timeElapsed = self.timeElapsed + dt
+
+  self.piece.canRotate = true
 
   -- double speed on down *shrug*
   if love.keyboard.isDown('down') then
@@ -81,18 +72,26 @@ function match:update(dt)
   -- tl
   if self.piece.tl and (self.filled[''..(i-1)..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
     hasCollided = true
+  elseif (self.filled[''..(i-1)..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
+    self.piece.canRotate = false
   end
   -- tr
   if self.piece.tr and (self.filled[''..i..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
     hasCollided = true
+  elseif (self.filled[''..i..'-'..j] or self.piece.y >= ((dims.height+1)* dims.tile_size)) then
+    self.piece.canRotate = false
   end
   -- bl
   if self.piece.bl and (self.filled[''..(i-1)..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
     hasCollided = true
+  elseif (self.filled[''..(i-1)..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
+    self.piece.canRotate = false
   end
   -- br
   if self.piece.br and (self.filled[''..i..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
     hasCollided = true
+  elseif (self.filled[''..i..'-'..j+1] or self.piece.y >= (dims.height * dims.tile_size)) then
+    self.piece.canRotate = false
   end
   if hasCollided then
     -- grab rows
@@ -342,7 +341,7 @@ end
 function match:keypressed(key)
   local x = math.floor(self.piece.x/dims.tile_size)
   local y = math.floor(self.piece.y/dims.tile_size)
-  local hasCollided = false
+  local hasCollided = false -- only disable when colliding (could be one and done)
   if key == 'left' then
     -- TODO ignore non-filled pieces
     -- tl
@@ -372,10 +371,10 @@ function match:keypressed(key)
     end
   end
 
-  -- TODO - rotation collision
-  if key == 'a' then
+  -- only rotate if there's room for it
+  if self.piece.canRotate and key == 'a' then
     self.piece:rotateLeft()
-  elseif key == 'd' then
+  elseif self.piece.canRotate and key == 'd' then
     self.piece:rotateRight()
   end
 
@@ -400,6 +399,7 @@ function match:draw(x,y)
   for i=0, dims.width do
     for j=0, dims.height do
       if self.filled[''..i..'-'..j] then
+        -- TODO: alternate square if not canRotate?
         love.graphics.draw(
           tileMap[self.filled[''..i..'-'..j]].sheet,
           tileMap[self.filled[''..i..'-'..j]].quad,

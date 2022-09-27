@@ -55,6 +55,8 @@ function piece:new(o)
   o.bl = nil
   o.br = nil
 
+  o.canRotate = true
+
   setmetatable(o, self)
   self.__index = self
   --self.__tostring = function() return 'piece{'..o.id..'}' end
