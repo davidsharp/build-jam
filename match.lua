@@ -66,7 +66,7 @@ function match:update(dt)
     self.piece.y = self.piece.y - (dt * match.speed * 2)
   end
 
-  local hasCollided = false
+  local hasCollided = false -- only disable when colliding (could be one and done)
   local i = math.floor(self.piece.x/dims.tile_size)
   local j = math.floor(self.piece.y/dims.tile_size)
   -- tl
@@ -341,7 +341,7 @@ end
 function match:keypressed(key)
   local x = math.floor(self.piece.x/dims.tile_size)
   local y = math.floor(self.piece.y/dims.tile_size)
-  local hasCollided = false -- only disable when colliding (could be one and done)
+  local hasCollided = false
   if key == 'left' then
     -- TODO ignore non-filled pieces
     -- tl
