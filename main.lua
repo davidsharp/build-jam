@@ -44,6 +44,11 @@ function love.load()
     person = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,0)}
   }
 
+  frame_tiles = love.graphics.newImage('assets/frames.png')
+  frames = {
+    screw = {x=8,y=7}
+  }
+
   sfx = {
     land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static'),
     explode = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Hurt01.wav', 'static'),

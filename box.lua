@@ -7,17 +7,19 @@ function box(_x,_y,w,h)
   local y = _y - 8
   local width = (w * 16) + 16
   local height = (h * 16) + 16
+  local frame_x = frames.screw.x
+  local frame_y = frames.screw.y
   boxBorderQuads = boxBorderQuads or {
-    love.graphics.newQuad(35 * 16, 12 * 16, 8, 8, k_tiles_trans),
-    love.graphics.newQuad(35.5 * 16, 12.5 * 16, 8, 8, k_tiles_trans),
-    love.graphics.newQuad(35.5 * 16, 12 * 16, 8, 8, k_tiles_trans),
-    love.graphics.newQuad(35 * 16, 12.5 * 16, 8, 8, k_tiles_trans),
+    love.graphics.newQuad((frame_x * (8*3)), (frame_y * (8*3)), 8, 8, frame_tiles),
+    love.graphics.newQuad((frame_x * (8*3))+16, (frame_y * (8*3))+16, 8, 8, frame_tiles),
+    love.graphics.newQuad((frame_x * (8*3))+16, (frame_y * (8*3)), 8, 8, frame_tiles),
+    love.graphics.newQuad((frame_x * (8*3)), (frame_y * (8*3))+16, 8, 8, frame_tiles)
   }
   love.graphics.setColor(0,0,0)
   love.graphics.rectangle('fill',x,y,width+16,height+16)
   love.graphics.setColor(1,1,1)
-  love.graphics.draw(k_tiles_trans, pieceBorderQuads[1], x - 4, y - 4)
-  love.graphics.draw(k_tiles_trans, pieceBorderQuads[2], x + width + 12, y + height + 12)
-  love.graphics.draw(k_tiles_trans, pieceBorderQuads[3], x + width + 12, y - 4)
-  love.graphics.draw(k_tiles_trans, pieceBorderQuads[4], x - 4, y + height + 12)
+  love.graphics.draw(frame_tiles, boxBorderQuads[1], x - 4, y - 4)
+  love.graphics.draw(frame_tiles, boxBorderQuads[2], x + width + 12, y + height + 12)
+  love.graphics.draw(frame_tiles, boxBorderQuads[3], x + width + 12, y - 4)
+  love.graphics.draw(frame_tiles, boxBorderQuads[4], x - 4, y + height + 12)
 end
