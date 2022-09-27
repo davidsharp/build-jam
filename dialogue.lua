@@ -74,8 +74,10 @@ end
 function dialogue:draw(x,y)
   local x = x or 180
   local y = y or 100
-  box(x,y,10,2)
+  box(x,y,10,2,0,frames.speech,true)
+  love.graphics.setColor(0,0,0)
   love.graphics.print(self.display,x,y)
+  love.graphics.setColor(1,1,1)
   if string.len(self.display) == string.len(self.text[self.boxIndex]) then
     -- TODO - move to bottom of box (draw over border and give a background)
     love.graphics.draw(pressToContinue,x,y+16)

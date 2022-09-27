@@ -46,7 +46,8 @@ function love.load()
 
   frame_tiles = love.graphics.newImage('assets/frames.png')
   frames = {
-    screw = {x=8,y=7}
+    screw = {x=8,y=7},
+    speech = {x=11,y=6}
   }
 
   sfx = {

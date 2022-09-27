@@ -2,7 +2,7 @@
 -- width and height are specified in 16x16 squares, rather than by pixel!
 --  perhaps x/y should be too
 
-function box(x,y,w,h,border,frame)
+function box(x,y,w,h,border,frame,invert)
   local width = (w * 16)
   local height = (h * 16)
   frame = frame or frames.screw
@@ -16,7 +16,7 @@ function box(x,y,w,h,border,frame)
     t = love.graphics.newQuad((frame.x * (8*3))+8, (frame.y * (8*3)), 8, 8, frame_tiles),
     b = love.graphics.newQuad((frame.x * (8*3))+8, (frame.y * (8*3))+16, 8, 8, frame_tiles)
   }
-  love.graphics.setColor(0,0,0)
+  if not invert then love.graphics.setColor(0,0,0) end
   love.graphics.rectangle('fill',x,y,width,height)
   love.graphics.setColor(1,1,1)
   love.graphics.draw(frame_tiles, boxBorderQuads['tl'], x - 8, y - 8)
