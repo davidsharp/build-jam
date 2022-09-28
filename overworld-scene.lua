@@ -22,8 +22,16 @@ end
 
 function overworldScene.load()
   jukebox.switchTrack('goofy')
-  player = player:new({position = {x=5*16,y=6*16}})
+  player = player:new({position = {x=5*16,y=7*16}})
   player.direction = 'up'
+  player.frame = 0
+  player.moving = true
+  Timer.tween(0.5,player.position,
+    {x=player.position.x,y=player.position.y - 16},
+    'linear',
+    function()
+      player.moving = false
+      end)
 
   overworldScene.loadFloor()
 end
@@ -47,7 +55,8 @@ end
 function overworldScene.getPerson()
   -- TODO - add more people
   if true then
-    return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true})
+    return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true,
+    callback=function() matchScene.set() end})
   end
 end
 

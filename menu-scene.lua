@@ -33,10 +33,6 @@ end
 
 function menuScene.keypressed(key)
   if key == 'return' then
-    matchScene.set()
-  end
-  -- testing/debugging the overworld
-  if key == 'o' then
     overworldScene.set()
   end
 end
