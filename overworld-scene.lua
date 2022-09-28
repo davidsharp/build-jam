@@ -71,7 +71,7 @@ function overworldScene.getStairsDown()
       overworldScene.loadFloor()
       player.position.x = 1*16
       player.position.y = 2*16
-      player.direction = 'left'
+      player.direction = 'down'
     end})
   end
 end
