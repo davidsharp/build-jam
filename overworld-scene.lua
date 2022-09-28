@@ -53,12 +53,26 @@ end
 
 function overworldScene.getStairsUp()
   if overworldScene.floor <= overworldScene.floors then
-    return item:new({tile = tileMap['stairsUp'],position = {x=1*16,y=1*16}})
+    return item:new({tile = tileMap['stairsUp'],position = {x=1*16,y=1*16},
+    callback=function()
+      overworldScene.floor = overworldScene.floor + 1
+      overworldScene.loadFloor()
+      player.position.x = 7*16
+      player.position.y = 5*16
+      player.direction = 'left'
+    end})
   end
 end
 function overworldScene.getStairsDown()
   if overworldScene.floor > 0 then
-    return item:new({tile = tileMap['stairsDown'],position = {x=8*16,y=5*16}})
+    return item:new({tile = tileMap['stairsDown'],position = {x=8*16,y=5*16},
+    callback=function()
+      overworldScene.floor = overworldScene.floor - 1
+      overworldScene.loadFloor()
+      player.position.x = 1*16
+      player.position.y = 2*16
+      player.direction = 'left'
+    end})
   end
 end
 function overworldScene.getDoor()
