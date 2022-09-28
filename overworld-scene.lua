@@ -60,7 +60,8 @@ function overworldScene.getStairsUp()
       player.position.x = 8*16
       player.position.y = 5*16
       player.direction = 'left'
-      -- why doesn't this animate?
+      player.frame = 0
+      player.moving = true
       Timer.tween(0.5,player.position,
           {x=player.position.x - 16,y=player.position.y},
           'linear',
@@ -80,7 +81,8 @@ function overworldScene.getStairsDown()
       player.position.x = 1*16
       player.position.y = 1*16
       player.direction = 'down'
-      player.isMoving = true
+      player.frame = 0
+      player.moving = true
       Timer.tween(0.5,player.position,
           {x=player.position.x,y=(player.position.y + 16)},
           'linear',
