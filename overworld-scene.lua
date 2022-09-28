@@ -77,7 +77,10 @@ function overworldScene.getStairsDown()
 end
 function overworldScene.getDoor()
   if overworldScene.floor == 0 then
-    return item:new({tile = tileMap['door'],position = {x=5*16,y=6*16}})
+    return item:new({tile = tileMap['door'],position = {x=5*16,y=6*16},
+    callback=function()
+      menuScene.set()
+    end})
   end
 end
 
