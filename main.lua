@@ -31,6 +31,9 @@ function love.load()
   k_tiles = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome_packed.png')
   k_tiles_trans = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
 
+  ground_floor_outer = love.graphics.newImage('assets/building-bits/g-floor.png')
+  other_floor_outer = love.graphics.newImage('assets/building-bits/other-floor.png')
+
   tileMap = {
     -- match pieces
     brick1 = {sheet=k_tiles,quad=getTile(k_tiles,6,13)},
