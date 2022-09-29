@@ -264,27 +264,37 @@ function match:explodeExplosions()
     local y = exp.y
     -- up
     if y > 0 and self.filled[''..x..'-'..(y-1)] then
-      self.filled[''..x..'-'..(y-1)] = 'dust'
+      self.filled[''..x..'-'..(y-1)] = 'explosion'
       table.insert(dust,{x=x,y=y-1})
     end
     -- down
     if y < dims.height and self.filled[''..x..'-'..(y+1)] then
-      self.filled[''..x..'-'..(y+1)] = 'dust'
+      self.filled[''..x..'-'..(y+1)] = 'explosion'
       table.insert(dust,{x=x,y=y+1})
     end
     -- left
     if x > 0 and self.filled[''..(x-1)..'-'..y] then
-      self.filled[''..(x-1)..'-'..y] = 'dust'
+      self.filled[''..(x-1)..'-'..y] = 'explosion'
       table.insert(dust,{x=x-1,y=y})
     end
     -- right
     if x < dims.width and self.filled[''..(x+1)..'-'..y] then
-      self.filled[''..(x+1)..'-'..y] = 'dust'
+      self.filled[''..(x+1)..'-'..y] = 'explosion'
       table.insert(dust,{x=x+1,y=y})
     end
   end
 
-  Timer.after(0.5, function()
+  Timer.after(0.2, function()
+    sfx.explode:play()
+    for i,exp in ipairs(explosions) do
+      self.filled[''..exp.x..'-'..exp.y] = 'dust'
+    end
+    for i,exp in ipairs(dust) do
+      self.filled[''..exp.x..'-'..exp.y] = 'dust'
+    end
+  end)
+
+  Timer.after(0.4, function()
     sfx.explode:play()
     for i,exp in ipairs(explosions) do
       self.filled[''..exp.x..'-'..exp.y] = nil
@@ -297,7 +307,7 @@ function match:explodeExplosions()
   -- TODO ~ Handle chain?
 
   -- done
-  Timer.after(1, function() frozen = false end)
+  Timer.after(0.5, function() frozen = false end)
 end
 
 function match:findExplosions()

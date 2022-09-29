@@ -39,7 +39,7 @@ function love.load()
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
     spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
     explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
-    dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,12)}, --temp, update
+    dust = {sheet=k_tiles_trans,quad=getTile(k_tiles,31,12)}, -- multiple stages?
     null = {sheet=k_tiles_trans,quad=getTile(k_tiles,35,12)},
     -- overworld items
     stairsUp = {sheet=tiles,quad=getTile(tiles,9,6)},
