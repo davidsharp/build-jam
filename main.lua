@@ -33,7 +33,9 @@ function love.load()
 
   tileMap = {
     -- match pieces
-    brick = {sheet=tiles,quad=getTile(tiles,11,19)},
+    brick1 = {sheet=k_tiles,quad=getTile(k_tiles,6,13)},
+    brick2 = {sheet=k_tiles,quad=getTile(k_tiles,7,15)},
+    brick3 = {sheet=k_tiles,quad=getTile(k_tiles,10,17)},
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
     spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
     explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},

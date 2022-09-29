@@ -23,7 +23,7 @@ function pieceFromPool()
   -- to start, set everything as bricks
   for i, piece in ipairs(pieces) do
     if i <= count then
-      pieces[i] = 'brick'
+      pieces[i] = 'brick'..math.random(1,3)
     else pieces[i] = nil end
   end
 
@@ -88,7 +88,7 @@ function piece:randomise()
   -- to start, set everything as bricks
   for i, piece in ipairs(pieces) do
     if i <= count then
-      pieces[i] = 'brick'
+      pieces[i] = 'brick'..math.random(1,3)
     else pieces[i] = nil end
   end
 
