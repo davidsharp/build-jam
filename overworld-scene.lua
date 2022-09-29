@@ -59,9 +59,11 @@ function overworldScene.getPerson()
     callback=function() matchScene.set({callback = function(win)
       if win then
         -- need to set location and stuff and not animate in
+        print('won match')
         overworldScene.set()
       else
         -- need to set location and stuff and not animate in
+        print('lost match')
         overworldScene.set()
       end
     end}) end})

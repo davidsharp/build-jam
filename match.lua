@@ -239,7 +239,7 @@ function match:placePiece()
   -- TODO: proper game end (freeze then callback?)
   if gameOver then
     --self:init()
-    self.callback()
+    self.callback(false)
   end
 end
 
