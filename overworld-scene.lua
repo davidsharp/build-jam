@@ -6,7 +6,11 @@ overworldScene = {
   floor = 0,
   floors = 0,
   day = 1,
-  residents = {}
+  residents = {},
+  -- "usePlayerPosition" decides whether we should use this or init movement
+  -- could do opposite and set a reset flag
+  usePlayerPosition = false,
+  playerPosition = {x=0,y=0}
 }
 
 function overworldScene.set()
@@ -21,6 +25,11 @@ end
 
 function overworldScene.load()
   jukebox.switchTrack('goofy')
+  if overworldScene.usePlayerPosition then
+    -- assume we have a player?
+    --player = player or player:new({position = overworldScene.playerPosition})
+    player.position = overworldScene.playerPosition
+  else
   player = player:new({position = {x=5*16,y=7*16}})
   player.direction = 'up'
   player.frame = 0
@@ -31,6 +40,10 @@ function overworldScene.load()
     function()
       player.moving = false
       end)
+  end
+
+  -- going forward use previous state on reload
+  overworldScene.usePlayerPosition = true
 
   overworldScene.loadFloor()
 end
@@ -62,14 +75,14 @@ function overworldScene.getPerson()
   -- TODO - add more people
   if true then
     return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true,
-    callback=function() matchScene.set({callback = function(win)
+    callback=function()
+      overworldScene.playerPosition = player.position
+      matchScene.set({callback = function(win)
       if win then
-        -- need to set location and stuff and not animate in
         print('won match')
         overworldScene.day = overworldScene.day + 1
         overworldScene.set()
       else
-        -- need to set location and stuff and not animate in
         print('lost match')
         overworldScene.day = overworldScene.day + 1
         overworldScene.set()

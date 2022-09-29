@@ -20,6 +20,8 @@ function menuScene.load()
   jukebox.switchTrack('goofy')
 
   Timer.after(2,function() menuScene.ready = true end)
+  -- reset player position and animate
+  overworldScene.usePlayerPosition = false
 end
 
 function menuScene.update(dt)
