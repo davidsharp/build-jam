@@ -2,11 +2,10 @@
 --   but basically a description for the non-puzzle portion
 --  show current room, intro "cutscene" possibly also lives here
 
--- TODO, fix bug where going back from game to map crashes
-
 overworldScene = {
   floor = 0,
   floors = 0,
+  day = 1,
   residents = {}
 }
 
@@ -67,10 +66,12 @@ function overworldScene.getPerson()
       if win then
         -- need to set location and stuff and not animate in
         print('won match')
+        overworldScene.day = overworldScene.day + 1
         overworldScene.set()
       else
         -- need to set location and stuff and not animate in
         print('lost match')
+        overworldScene.day = overworldScene.day + 1
         overworldScene.set()
       end
     end}) end})
@@ -141,6 +142,12 @@ function overworldScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
   love.graphics.print('Floor '..(overworldScene.floor == 0 and 'G' or overworldScene.floor),16,16)
+  love.graphics.print(''..overworldScene.day..(
+    (overworldScene.day % 10 == 1 and 'st') or
+    (overworldScene.day % 10 == 2 and 'nd') or
+    (overworldScene.day % 10 == 3 and 'rd') or
+    'th'
+  )..' September',16,32)
   if person then person:draw(world_x,world_y) end
   if stairsDown then stairsDown:draw(world_x,world_y) end
   if stairsUp then stairsUp:draw(world_x,world_y) end
