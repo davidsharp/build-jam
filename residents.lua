@@ -1,7 +1,7 @@
 -- just a dictionary of characters
 
 downstairsBloke = {
-  sprite = 'person',
+  sprite = 'bloke',
   success = 'Great work today, I look forward to seeing how you do tomorrow',
   failure = 'Hard luck, come back refreshed tomorrow',
   dialog = {
@@ -18,7 +18,7 @@ downstairsBloke = {
 
 residents = {
   {
-    sprite = 'person',
+    sprite = 'woman',
     request = 'Build me a home, plz',
     success = 'Wow, thanks!',
     failure = 'Dang, I\'ll have to find a home elsewhere',
