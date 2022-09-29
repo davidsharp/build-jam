@@ -83,6 +83,7 @@ function overworldScene.getPerson()
       if win then
         print('won match')
         overworldScene.day = overworldScene.day + 1
+        overworldScene.floors = overworldScene.floors + 1
         overworldScene.set()
       else
         print('lost match')
@@ -168,6 +169,10 @@ function overworldScene.draw()
   if stairsDown then stairsDown:draw(world_x,world_y) end
   if stairsUp then stairsUp:draw(world_x,world_y) end
   if door then door:draw(world_x,world_y) end
+
+  if overworldScene.floor > overworldScene.floors then
+    drawBuilding(world_x,world_y+(16*7))
+  end
 
   player:draw(world_x,world_y)
 end
