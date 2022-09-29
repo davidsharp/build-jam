@@ -41,7 +41,7 @@ function menuScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
   if stairs then stairs:draw(world_x,world_y) end
-  love.graphics.draw(ground_floor_outer,world_x,world_y+(7*16))
+  drawBuilding(world_x,world_y+(7*16))
   love.graphics.print("build [working title]",8.5*16,5*16)
   if menuScene.ready then love.graphics.print("press enter to start",8.5*16,6*16) end
 end

@@ -9,6 +9,7 @@ require 'box'
 require 'player'
 require 'jukebox'
 require 'item'
+require 'drawBuilding'
 
 debug = false
 
