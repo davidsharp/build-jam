@@ -22,6 +22,9 @@ function menuScene.load()
   Timer.after(2,function() menuScene.ready = true end)
   -- reset player position and animate
   overworldScene.usePlayerPosition = false
+
+  map = sti('maps/rooftop.lua')
+  stairs = item:new({tile = tileMap['stairsDown'],position = {x=8*16,y=5*16}})
 end
 
 function menuScene.update(dt)
@@ -32,8 +35,12 @@ function menuScene.update(dt)
   jukebox.update(dt)
 end
 
+local world_x = 16*(12.5-5)
+local world_y = 16*3
 function menuScene.draw()
   love.graphics.scale(2)
+  --map:draw(world_x,world_y,2,2)
+  --if stairs then stairs:draw(world_x,world_y) end
   love.graphics.print("build [working title]",5*16,5*16)
   if menuScene.ready then love.graphics.print("press enter to start",5*16,6*16) end
 end
