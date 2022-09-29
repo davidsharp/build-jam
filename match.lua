@@ -23,7 +23,7 @@ function match:new(o)
     o.target = o.target or 10
 
     o.timeElapsed = 0
-    o.timeToBeat = 60
+    o.timeToBeat = 120
 
     o.callback = o.callback or function() end
 
@@ -111,6 +111,14 @@ function match:update(dt)
     if #explosions > 0 then match:explodeExplosions() end
 
     -- TODO: reward removal of two rows?
+  end
+
+  -- TODO: more fanfare, etc
+  if self.lines >= self.target then
+    self.callback(true)
+  end
+  if self.timeElapsed >= self.timeToBeat then
+    self.callback(false)
   end
 end
 
