@@ -10,6 +10,8 @@ require 'player'
 require 'jukebox'
 require 'item'
 
+debug = false
+
 gameState = {
   scene = "menu",
   maxVolume = 0.5,

@@ -152,6 +152,7 @@ end
 local world_x = 16 * 5
 local world_y = 16*5
 function overworldScene.draw()
+  if debug then drawDebug() end
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
   love.graphics.print('Floor '..(overworldScene.floor == 0 and 'G' or overworldScene.floor),16,16)

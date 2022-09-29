@@ -14,3 +14,10 @@ function split (inputstr, sep)
   end
   return t
 end
+
+function drawDebug()
+  love.graphics.setColor(0,0,1)
+  love.graphics.rectangle('fill',0,0,400*2,240*2)
+  love.graphics.setColor(1,1,1)
+  love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+end

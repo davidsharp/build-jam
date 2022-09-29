@@ -32,13 +32,11 @@ function matchScene.update(dt)
 end
 
 function matchScene.draw()
-  love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
   if not gameState.match then return end
 
-  -- debug
-  love.graphics.setColor(0,0,1)
-  love.graphics.rectangle('fill',0,0,400*2,240*2)
-  love.graphics.setColor(1,1,1)
+  if debug then
+    drawDebug()
+  end
 
   -- what if yellow and black like construction tape?
   --love.graphics.setColor(1,1,0)

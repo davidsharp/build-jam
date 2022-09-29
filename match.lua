@@ -396,9 +396,9 @@ function match:keypressed(key)
   end
 
   -- debug, refresh
-  if key == 'return' then
+  --[[if key == 'return' then
     self:init()
-  end
+  end]]
 end
 
 -- x,y offset are where to draw the match board on the screen
