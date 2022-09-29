@@ -173,10 +173,5 @@ function overworldScene.draw()
 end
 
 function overworldScene.keypressed(key)
-  -- testing floor logic
-  if key == 'space' then
-    overworldScene.floor = overworldScene.floors + 1
-    overworldScene.loadFloor()
-  end
 end
 
