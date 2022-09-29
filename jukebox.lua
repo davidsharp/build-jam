@@ -11,6 +11,9 @@ function jukebox.init()
     game = love.audio.newSource( 'assets/JDSherbett/JDSherbert - Minigame Music Pack - Corrupted Circuitry.ogg', 'stream'),
     goofy = love.audio.newSource( 'assets/JDSherbett/JDSherbert - Nostalgia Music Pack - Saturday Morning Cartoons.ogg', 'stream')
   }
+  for _,track in pairs(music) do
+    track:setLooping(true)
+  end
 end
 
 function jukebox.start(track)
