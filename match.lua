@@ -251,7 +251,7 @@ function match:placePiece()
   end
 end
 
-chaosMode = false
+chaosMode = true
 function match:explodeExplosions()
   -- Now freeze the game
   frozen = true
