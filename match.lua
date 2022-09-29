@@ -424,6 +424,13 @@ function match:keypressed(key)
     paused = not paused
   end
 
+  if debug and key == 'w' then
+    self.callback(true)
+  end
+  if debug and key == 'l' then
+    self.callback(false)
+  end
+
   -- debug, refresh
   --[[if key == 'return' then
     self:init()
