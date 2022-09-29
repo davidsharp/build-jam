@@ -264,27 +264,30 @@ function match:explodeExplosions()
     local y = exp.y
     -- up
     if y > 0 and self.filled[''..x..'-'..(y-1)] then
-      self.filled[''..x..'-'..(y-1)] = 'explosion'
+      --self.filled[''..x..'-'..(y-1)] = 'explosion'
       table.insert(dust,{x=x,y=y-1})
     end
     -- down
     if y < dims.height and self.filled[''..x..'-'..(y+1)] then
-      self.filled[''..x..'-'..(y+1)] = 'explosion'
+      --self.filled[''..x..'-'..(y+1)] = 'explosion'
       table.insert(dust,{x=x,y=y+1})
     end
     -- left
     if x > 0 and self.filled[''..(x-1)..'-'..y] then
-      self.filled[''..(x-1)..'-'..y] = 'explosion'
+      --self.filled[''..(x-1)..'-'..y] = 'explosion'
       table.insert(dust,{x=x-1,y=y})
     end
     -- right
     if x < dims.width and self.filled[''..(x+1)..'-'..y] then
-      self.filled[''..(x+1)..'-'..y] = 'explosion'
+      --self.filled[''..(x+1)..'-'..y] = 'explosion'
       table.insert(dust,{x=x+1,y=y})
     end
   end
 
-  Timer.after(0.2, function()
+  -- bit of a hack, swap out the dust tile, rather than
+  -- looping over the explosions a bunch
+  tileMap.dust = tileMap.dust1
+  Timer.after(0.1, function()
     sfx.explode:play()
     for i,exp in ipairs(explosions) do
       self.filled[''..exp.x..'-'..exp.y] = 'dust'
@@ -294,7 +297,12 @@ function match:explodeExplosions()
     end
   end)
 
-  Timer.after(0.4, function()
+  -- TODO, could be an interval and counter?
+  Timer.after(0.2, function() tileMap.dust = tileMap.dust2 end)
+  Timer.after(0.3, function() tileMap.dust = tileMap.dust3 end)
+  Timer.after(0.4, function() tileMap.dust = tileMap.dust4 end)
+
+  Timer.after(0.5, function()
     sfx.explode:play()
     for i,exp in ipairs(explosions) do
       self.filled[''..exp.x..'-'..exp.y] = nil
