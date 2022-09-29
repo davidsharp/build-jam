@@ -3,7 +3,7 @@
 downstairsBloke = {
   sprite = 'person',
   success = 'Great work today, I look forward to seeing how you do tomorrow',
-  failure = 'Hard luck, come back refreshed tomorrow'
+  failure = 'Hard luck, come back refreshed tomorrow',
   dialog = {
     {
       'Hey, so you must be the new builder',

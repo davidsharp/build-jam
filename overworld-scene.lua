@@ -2,6 +2,8 @@
 --   but basically a description for the non-puzzle portion
 --  show current room, intro "cutscene" possibly also lives here
 
+require 'residents'
+
 overworldScene = {
   floor = 0,
   floors = 0,
@@ -72,9 +74,9 @@ function overworldScene.loadFloor()
 end
 
 function overworldScene.getPerson()
-  -- TODO - add more people
+  local person = overworldScene.floor == 0 and downstairsBloke or residents[(overworldScene.floor % #residents)+1]
   if true then
-    return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true,
+    return item:new({tile = tileMap[person.sprite],position = {x=6*16,y=2*16},solid = true,
     callback=function()
       overworldScene.playerPosition = player.position
       matchScene.set({callback = function(win)
