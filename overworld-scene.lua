@@ -44,11 +44,15 @@ function overworldScene.loadFloor()
   stairsDown = overworldScene.getStairsDown()
   stairsUp = overworldScene.getStairsUp()
   door = overworldScene.getDoor()
+  -- fixes down when spawn on door
+  door2 = overworldScene.getDoor()
+  door2.position.y = door2.position.y + 16
   colliders = {
     person,
     stairsDown,
     stairsUp,
-    door
+    door,
+    door2
   }
 end
 

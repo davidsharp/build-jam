@@ -104,8 +104,8 @@ function player:update(dt)
         --local x,y = map:convertPixelToTile(self.position.x + moveBy.x,self.position.y + moveBy.y)
         local x = ((self.position.x + moveBy.x)/16)+1
         local y = ((self.position.y + moveBy.y)/16)+1
-        local data = map.layers[1].data
-        wallCollision = (data and data[x] and data[y][x] and data[y][x].gid ~= 0) or false
+        local data = map.layers and map.layers[1] and map.layers[1].data
+        wallCollision = (data and data[y] and data[y][x] and data[y][x].gid ~= 0) or false
         self.frame = 0
         self.moving = true
         self.direction = moveDir
