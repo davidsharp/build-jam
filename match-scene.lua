@@ -2,18 +2,20 @@ require 'match'
 
 matchScene = {}
 
-function matchScene.set()
+function matchScene.set(o)
   gameState.scene = "match"
 
   love.update = matchScene.update
   love.draw = matchScene.draw
   love.keypressed = matchScene.keypressed
 
+  matchScene.callback = o.callback or function() end
+
   matchScene.load()
 end
 
 function matchScene.load()
-  gameState.match = match:new()
+  gameState.match = match:new({callback =  matchScene.callback})
   jukebox.switchTrack('game')
 end
 

@@ -56,7 +56,15 @@ function overworldScene.getPerson()
   -- TODO - add more people
   if true then
     return item:new({tile = tileMap['person'],position = {x=6*16,y=2*16},solid = true,
-    callback=function() matchScene.set() end})
+    callback=function() matchScene.set({callback = function(win)
+      if win then
+        -- need to set location and stuff and not animate in
+        overworldScene.set()
+      else
+        -- need to set location and stuff and not animate in
+        overworldScene.set()
+      end
+    end}) end})
   end
 end
 

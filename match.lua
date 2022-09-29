@@ -25,6 +25,8 @@ function match:new(o)
     o.timeElapsed = 0
     o.timeToBeat = 60
 
+    o.callback = o.callback or function() end
+
     setmetatable(o, self)
     self.__index = self
     self.__tostring = function() return 'match{'..o.id..'}' end
@@ -235,7 +237,10 @@ function match:placePiece()
   if y <= 1 then gameOver = true end
 
   -- TODO: proper game end (freeze then callback?)
-  if gameOver then self:init() end
+  if gameOver then
+    --self:init()
+    self.callback()
+  end
 end
 
 function match:explodeExplosions()
