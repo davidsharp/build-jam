@@ -78,19 +78,24 @@ function overworldScene.getPerson()
   if true then
     return item:new({tile = tileMap[person.sprite],position = {x=6*16,y=2*16},solid = true,
     callback=function()
-      overworldScene.playerPosition = player.position
-      matchScene.set({callback = function(win)
-      if win then
-        print('won match')
-        overworldScene.day = overworldScene.day + 1
-        overworldScene.floors = overworldScene.floors + 1
-        overworldScene.set()
+      if overworldScene.floor > overworldScene.floors then
+        overworldScene.playerPosition = player.position
+        matchScene.set({callback = function(win)
+          if win then
+            print('won match')
+            overworldScene.day = overworldScene.day + 1
+            overworldScene.floors = overworldScene.floors + 1
+            overworldScene.set()
+          else
+            print('lost match')
+            overworldScene.day = overworldScene.day + 1
+            overworldScene.set()
+          end
+        end})
       else
-        print('lost match')
-        overworldScene.day = overworldScene.day + 1
-        overworldScene.set()
+        print('TODO - plumb in text')
       end
-    end}) end})
+    end})
   end
 end
 
