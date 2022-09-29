@@ -151,8 +151,8 @@ function overworldScene.update(dt)
   player:update(dt)
 end
 
-local world_x = 16 * 5
-local world_y = 16*5
+local world_x = 16*(12.5-5)
+local world_y = 16*3
 function overworldScene.draw()
   if debug then drawDebug() end
   love.graphics.scale(2)
