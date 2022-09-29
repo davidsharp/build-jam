@@ -305,6 +305,8 @@ function match:explodeExplosions()
   end)
 
   -- TODO ~ Handle chain?
+  -- "fix" to animation seems to do a crude chain reaction :o
+  -- it maybe still looks a bit weird though
 
   -- done
   Timer.after(0.5, function() frozen = false end)
