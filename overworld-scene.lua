@@ -46,7 +46,7 @@ function overworldScene.loadFloor()
   door = overworldScene.getDoor()
   -- fixes down when spawn on door
   door2 = overworldScene.getDoor()
-  door2.position.y = door2.position.y + 16
+  if door2 then door2.position.y = door2.position.y + 16 end
   colliders = {
     person,
     stairsDown,
