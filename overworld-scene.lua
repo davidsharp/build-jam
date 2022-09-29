@@ -39,6 +39,9 @@ end
 function overworldScene.loadFloor()
   map = sti(overworldScene.floor > overworldScene.floors and 'maps/rooftop.lua' or 'maps/room.lua')
 
+  -- TODO, I think I need to make sure everything is loaded before allowing movement?
+  -- sometimes collision is just broken if enter has been pressed to early
+
   -- move player? Probably set in callback
   person = overworldScene.getPerson()
   stairsDown = overworldScene.getStairsDown()
