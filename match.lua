@@ -251,6 +251,7 @@ function match:placePiece()
   end
 end
 
+chaosMode = false
 function match:explodeExplosions()
   -- Now freeze the game
   frozen = true
@@ -264,22 +265,30 @@ function match:explodeExplosions()
     local y = exp.y
     -- up
     if y > 0 and self.filled[''..x..'-'..(y-1)] then
-      --self.filled[''..x..'-'..(y-1)] = 'explosion'
+      if chaosMode then
+        self.filled[''..x..'-'..(y-1)] = 'explosion'
+      end
       table.insert(dust,{x=x,y=y-1})
     end
     -- down
     if y < dims.height and self.filled[''..x..'-'..(y+1)] then
-      --self.filled[''..x..'-'..(y+1)] = 'explosion'
+      if chaosMode then
+        self.filled[''..x..'-'..(y+1)] = 'explosion'
+      end
       table.insert(dust,{x=x,y=y+1})
     end
     -- left
     if x > 0 and self.filled[''..(x-1)..'-'..y] then
-      --self.filled[''..(x-1)..'-'..y] = 'explosion'
+      if chaosMode then
+        self.filled[''..(x-1)..'-'..y] = 'explosion'
+      end
       table.insert(dust,{x=x-1,y=y})
     end
     -- right
     if x < dims.width and self.filled[''..(x+1)..'-'..y] then
-      --self.filled[''..(x+1)..'-'..y] = 'explosion'
+      if chaosMode then
+        self.filled[''..(x+1)..'-'..y] = 'explosion'
+      end
       table.insert(dust,{x=x+1,y=y})
     end
   end
