@@ -94,6 +94,8 @@ function overworldScene.getPerson()
         end})
       else
         print('TODO - plumb in text')
+        -- TODO, disable movement, etc
+        dialog = dialogue:new({text=person.dialog[1]})
       end
     end})
   end
@@ -155,6 +157,7 @@ function overworldScene.update(dt)
   Timer.update(dt)
   jukebox.update(dt)
   player:update(dt)
+  if dialog then dialog:update(dt) end
 end
 
 local world_x = 16*(12.5-5)
@@ -178,6 +181,8 @@ function overworldScene.draw()
   if overworldScene.floor > overworldScene.floors then
     drawBuilding(world_x,world_y+(16*7))
   end
+
+  if dialog then dialog:draw(16*(12.5-5),16*10) end
 
   player:draw(world_x,world_y)
 end
