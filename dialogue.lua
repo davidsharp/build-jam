@@ -86,6 +86,6 @@ function dialogue:draw(x,y)
 
   -- TODO - also draw face, and make box bigger?
   if self.face and tileMap[self.face] then
-    love.graphics.draw(k_tiles_trans,tileMap[self.face].quad,x-16-8,y+8+16)
+    love.graphics.draw(tileMap[self.face].sheet,tileMap[self.face].quad,x-16-8,y+8+16)
   end
 end
