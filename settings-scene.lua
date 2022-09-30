@@ -11,7 +11,7 @@ function settingsScene.set()
 end
 
 function settingsScene.load()
-  
+  settingsScene.position = 0
 end
 
 function settingsScene.update(dt)
@@ -24,9 +24,10 @@ function settingsScene.draw()
   -- settings
   love.graphics.print('SETTINGS',16,16)
   -- arrow
-  love.graphics.print('~',2*16,32+(0*16))
+  love.graphics.print('~',2*16,32+((settingsScene.position%3)*16))
   love.graphics.print('Music '..(true and '[on]' or 'off'),3*16,2*16)
   love.graphics.print('SFX '..(true and '[on]' or 'off'),3*16,3*16)
+  love.graphics.print('< back',3*16,4*16)
 
   -- credits
   love.graphics.print('CREDITS',16,5*16)
@@ -41,4 +42,15 @@ function settingsScene.draw()
 end
 
 function settingsScene.keypressed(key)
+  if key == 'down' then
+    settingsScene.position = settingsScene.position + 1
+  end
+  if key == 'up' then
+    settingsScene.position = settingsScene.position - 1
+  end
+  if key == 'space' or key == 'return' then
+    if settingsScene.position % 3 == 2 then
+      menuScene.set()
+    end
+  end
 end
