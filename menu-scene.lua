@@ -39,11 +39,11 @@ local world_x = 16*(12.5-5)
 local world_y = 16*3
 function menuScene.draw()
   love.graphics.scale(2)
-  map:draw(world_x,world_y,2,2)
-  if stairs then stairs:draw(world_x,world_y) end
-  drawBuilding(world_x,world_y+(7*16))
-  love.graphics.print("build [working title]",8.5*16,5*16)
-  if menuScene.ready then love.graphics.print("press enter to start",8.5*16,6*16) end
+  map:draw(world_x,world_y-(overworldScene.floors*32),2,2)
+  if stairs then stairs:draw(world_x,world_y-(overworldScene.floors*32)) end
+  drawBuilding(world_x,world_y+(7*16)-(overworldScene.floors*32))
+  love.graphics.print("build [working title]",8.5*16,12*16)
+  if menuScene.ready then love.graphics.print("press enter to start",8.5*16,13*16) end
 end
 
 function menuScene.keypressed(key)
@@ -51,6 +51,8 @@ function menuScene.keypressed(key)
     overworldScene.set()
   end
   if menuScene.ready and key == 's' then
-    settingsScene.set()
+    -- settingsScene.set()
+    -- test adding floors
+    --overworldScene.floors = overworldScene.floors + 1
   end
 end
