@@ -50,4 +50,7 @@ function menuScene.keypressed(key)
   if menuScene.ready and key == 'return' then
     overworldScene.set()
   end
+  if menuScene.ready and key == 's' then
+    settingsScene.set()
+  end
 end
