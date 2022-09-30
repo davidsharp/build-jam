@@ -98,7 +98,6 @@ function player:update(dt)
             if collider.position.x == (self.position.x + moveBy.x) and
             collider.position.y == (self.position.y + moveBy.y) then
               collision = collider
-              print('collided!')
             end
           end
         end

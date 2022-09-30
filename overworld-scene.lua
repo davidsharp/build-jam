@@ -88,7 +88,6 @@ function overworldScene.getPerson()
             dialog = nil
             matchScene.set({callback = function(win)
               if win then
-                print('won match')
                 overworldScene.day = overworldScene.day + 1
                 overworldScene.floors = overworldScene.floors + 1
                 overworldScene.set()
@@ -100,7 +99,6 @@ function overworldScene.getPerson()
                   end
                 })
               else
-                print('lost match')
                 overworldScene.day = overworldScene.day + 1
                 overworldScene.set()
                 dialog = dialogue:new({
