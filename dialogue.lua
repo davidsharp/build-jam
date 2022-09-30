@@ -8,7 +8,7 @@ function dialogue:new(o)
   o.index = 1
   o.boxIndex = 1
   o.callback = o.callback or function() print('no callback on "'..o.text[1]..'"')  end
-  o.face = nil
+  o.face = o.face or nil
 
   pressToContinue = pressToContinue or getTile(k_tiles,25,21)
 
@@ -72,8 +72,8 @@ end
 
 -- should be a certain height near the bottom
 function dialogue:draw(x,y)
-  local x = x or 180
-  local y = y or 100
+  local x = (x or 180) + (self.face and 8 or 0)
+  local y = (y or 100) + (self.face and 8 or 0)
   box(x,y,10,2,0,frames.speech,true)
   love.graphics.setColor(0,0,0)
   love.graphics.print(self.display,x,y)
@@ -85,4 +85,7 @@ function dialogue:draw(x,y)
   love.graphics.setColor(1,1,1)
 
   -- TODO - also draw face, and make box bigger?
+  if self.face and tileMap[self.face] then
+    love.graphics.draw(k_tiles_trans,tileMap[self.face].quad,x-16-8,y+8+16)
+  end
 end

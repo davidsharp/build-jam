@@ -56,13 +56,13 @@ function love.load()
     door = {sheet=tiles, quad=getTile(tiles,1,0)},
     person = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,0)},
     bloke = {sheet=k_tiles_trans, quad=getTile(k_tiles,29,1)},
-    bloke_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,10)},
+    bloke_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,10)},
     man = {sheet=k_tiles_trans, quad=getTile(k_tiles,27,1)},
     man_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,23,10)},
-    woman = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,1)},
+    woman = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,1)},
     woman_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,24,10)},
     oldMan = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,4)},
-    oldMan_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,10)}
+    oldMan_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,27,10)}
   }
 
   frame_tiles = love.graphics.newImage('assets/frames.png')

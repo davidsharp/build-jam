@@ -98,7 +98,10 @@ function overworldScene.getPerson()
       else
         print('TODO - plumb in text')
         -- TODO, disable movement, etc
-        dialog = dialogue:new({text=person.dialog[1],callback=function()
+        dialog = dialogue:new({
+          text=person.dialog[1],
+          face=person.sprite..'_face',
+          callback=function()
           dialog = nil
           player.frozen = false
         end})

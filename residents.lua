@@ -15,7 +15,7 @@ downstairsBloke = {
       'And each new floor\nis a new home!',
       'But be careful!',
       'There are reports\nthat our competition',
-      'has been sneaking\ndangerous material',
+      'has been sneaking\ndangerous materials',
       'into our supplies!',
       'And if they touch\nthey could explode!',
       'Which will set back\nyour day\'s build'
