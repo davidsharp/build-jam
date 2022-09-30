@@ -463,6 +463,11 @@ function match:draw(x,y)
   drawPiece(self.piece,x,y)
   drawCurrentBorder(self.piece,x,y)
 
+  if paused then
+    box(x+(16*3),y+(16*4),2,1)
+    love.graphics.print('paused',x+(16*2.75),y+(16*4))
+  end
+
   if dialog then dialog:draw() end
 end
 
