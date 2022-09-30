@@ -90,9 +90,8 @@ function player:update(dt)
       end
 
       -- adds interact button
-      -- TODO, prevent this from repeating right after dismiss
-      if false and (love.keyboard.isDown('space') or
-         love.keyboard.isDown('return')) then
+      if love.keyboard.isDown('space') or
+         love.keyboard.isDown('return') then
           local collision = nil
           local check = {x=0,y=0}
           if self.direction == 'up' then

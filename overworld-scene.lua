@@ -124,7 +124,11 @@ function overworldScene.getPerson()
           face=person.sprite..'_face',
           callback=function()
           dialog = nil
-          player.frozen = false
+          -- TODO, probably better to listen for button press,
+          -- then check for button down
+          Timer.after(0.1,function()
+            player.frozen = false
+          end)
         end})
       end
     end})
