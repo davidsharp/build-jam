@@ -89,6 +89,32 @@ function player:update(dt)
         moveBy.x = 16
       end
 
+      -- adds interact button
+      if love.keyboard.isDown('space') or
+         love.keyboard.isDown('return') then
+          local collision = nil
+          local check = {x=0,y=0}
+          if self.direction == 'up' then
+            check.y = -16
+          elseif self.direction == 'down' then
+            check.y = 16
+          elseif self.direction == 'left' then
+            check.x = -16
+          elseif self.direction == 'right' then
+            check.x = 16
+          end
+          if colliders then
+            -- colliders might be null, so use pairs > ipairs
+            for i,collider in pairs(colliders) do
+              if collider.position.x == (self.position.x + check.x) and
+              collider.position.y == (self.position.y + check.y) then
+                collision = collider
+              end
+            end
+          end
+          if collision and collision.solid then collision.callback() end
+      end
+
       if moveDir then
         local collision = nil
         local wallCollision = nil

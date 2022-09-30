@@ -48,7 +48,7 @@ end
 -- each .1 seconds write a letter, PoC
 local secondCount = 0
 function dialogue:update(dt)
-  if love.keyboard.isDown('space') then
+  if love.keyboard.isDown('space') or love.keyboard.isDown('return') then
     -- if text is completed
     if string.len(self.display) == string.len(self.text[self.boxIndex]) then
       -- if there's another text box

@@ -18,7 +18,14 @@ downstairsBloke = {
       'has been sneaking\ndangerous materials',
       'into our supplies!',
       'And if they touch\nthey could explode!',
-      'Which will set back\nyour day\'s build'
+      'Which will set back\nyour day\'s build',
+      'Use arrow keys to move\nleft and right',
+      'And down will drop\nyour piece faster',
+      'You can also use A/D\nkeys to rotate pieces',
+      'But you might not be able\nif something is',
+      'in the way!',
+      'Your next client is on\nthe top floor',
+      'Happy building!'
     }
   }
 }
@@ -30,10 +37,7 @@ residents = {
     success = 'Wow, thanks!',
     failure = 'Dang, I\'ll have to find\na home elsewhere',
     dialog = {
-      {'todo'},
-      {'todo'},
-      {'todo'},
-      {'todo'},
+      {'Thanks for building me\nsuch a lovely home!'}
     }
   }
 }

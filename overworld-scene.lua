@@ -158,7 +158,8 @@ function overworldScene.endDay()
         )
       end)
       Timer.after(2,function()
-        jukebox.start()
+        --jukebox.start('goofy')
+        --jukebox.switchTrack('goofy')
         menuScene.set()
         overworldScene.day = overworldScene.day + 1
         overworldScene.usePlayerPosition = false

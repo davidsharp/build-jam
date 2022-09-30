@@ -41,10 +41,13 @@ function jukebox.switchTrack(to)
 end
 
 function jukebox.fadeOut()
-  Timer.tween(1, volumes, {
+  Timer.tween(3, volumes, {
     game = 0.0,
     goofy = 0.0
-  }, 'linear',function() if currentTrack then music[currentTrack]:stop() end end)
+  }, 'linear',function() if currentTrack then
+    music[currentTrack]:stop()
+    currentTrack = nil
+  end end)
 end
 
 --[[
