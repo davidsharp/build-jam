@@ -42,17 +42,17 @@ function matchScene.draw()
   --love.graphics.setColor(1,1,0)
 
   love.graphics.scale(2)
-  --love.graphics.print("match TODO",30,30)
-  gameState.match:draw(48,0)
+  gameState.match:draw((4*16),0)
 
-  love.graphics.print("next",48 + (10*16), 48-32)
-  drawPiece(gameState.match.next,48 + (11*16), 48)
+  box(14*16,2*16,8,9)
 
-  --love.graphics.print("time:"..gameState.match.lines,48 + (10*16), 48+16)
-  love.graphics.print("floors:"..gameState.match.lines,48 + (10*16), 48+32)
-  love.graphics.print("target:"..gameState.match.target,48 + (10*16), 48+32+16)
-  love.graphics.print("time elapsed:"..math.floor(gameState.match.timeElapsed),48 + (10*16), 48+32+32)
-  love.graphics.print("time remaining:"..math.floor(gameState.match.timeToBeat - gameState.match.timeElapsed),48 + (10*16), 48+32+32+16)
+  love.graphics.print("next",(14*16), (2*16))
+  drawPiece(gameState.match.next,(15*16), (4*16))
+
+  love.graphics.print("floors:"..gameState.match.lines,(14*16), (6*16))
+  love.graphics.print("target:"..gameState.match.target,(14*16), (7*16))
+  love.graphics.print("time elapsed:"..math.floor(gameState.match.timeElapsed),(14*16), (8*16))
+  love.graphics.print("time remaining:"..math.floor(gameState.match.timeToBeat - gameState.match.timeElapsed),(14*16), (9*16))
 end
 
 function matchScene.keypressed(key)
