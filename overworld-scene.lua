@@ -81,23 +81,40 @@ function overworldScene.getPerson()
       player.frozen = true
       if overworldScene.floor > overworldScene.floors then
         overworldScene.playerPosition = player.position
-        matchScene.set({callback = function(win)
-          if win then
-            print('won match')
-            overworldScene.day = overworldScene.day + 1
-            overworldScene.floors = overworldScene.floors + 1
-            overworldScene.set()
-            player.frozen = false
-          else
-            print('lost match')
-            overworldScene.day = overworldScene.day + 1
-            overworldScene.set()
-            player.frozen = false
+        dialog = dialogue:new({
+          text={person.request},
+          face=person.sprite..'_face',
+          callback=function()
+            dialog = nil
+            matchScene.set({callback = function(win)
+              if win then
+                print('won match')
+                overworldScene.day = overworldScene.day + 1
+                overworldScene.floors = overworldScene.floors + 1
+                overworldScene.set()
+                dialog = dialogue:new({
+                  text={person.success},
+                  face=person.sprite..'_face',
+                  callback=function()
+                    player.frozen = false
+                  end
+                })
+              else
+                print('lost match')
+                overworldScene.day = overworldScene.day + 1
+                overworldScene.set()
+                dialog = dialogue:new({
+                  text={person.failure},
+                  face=person.sprite..'_face',
+                  callback=function()
+                    player.frozen = false
+                  end
+                })
+              end
+            end})
           end
-        end})
+        })
       else
-        print('TODO - plumb in text')
-        -- TODO, disable movement, etc
         dialog = dialogue:new({
           text=person.dialog[1],
           face=person.sprite..'_face',
