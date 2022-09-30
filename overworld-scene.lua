@@ -78,6 +78,7 @@ function overworldScene.getPerson()
   if true then
     return item:new({tile = tileMap[person.sprite],position = {x=6*16,y=2*16},solid = true,
     callback=function()
+      player.frozen = true
       if overworldScene.floor > overworldScene.floors then
         overworldScene.playerPosition = player.position
         matchScene.set({callback = function(win)
@@ -86,16 +87,21 @@ function overworldScene.getPerson()
             overworldScene.day = overworldScene.day + 1
             overworldScene.floors = overworldScene.floors + 1
             overworldScene.set()
+            player.frozen = false
           else
             print('lost match')
             overworldScene.day = overworldScene.day + 1
             overworldScene.set()
+            player.frozen = false
           end
         end})
       else
         print('TODO - plumb in text')
         -- TODO, disable movement, etc
-        dialog = dialogue:new({text=person.dialog[1]})
+        dialog = dialogue:new({text=person.dialog[1],callback=function()
+          dialog = nil
+          player.frozen = false
+        end})
       end
     end})
   end

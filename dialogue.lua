@@ -10,7 +10,7 @@ function dialogue:new(o)
   o.callback = o.callback or function() print('no callback on "'..o.text[1]..'"')  end
   o.face = nil
 
-  pressToContinue = pressToContinue or love.graphics.newText(font, '[press space to continue]')
+  pressToContinue = pressToContinue or getTile(k_tiles,25,21)
 
   setmetatable(o, self)
   self.__index = self
@@ -18,7 +18,7 @@ function dialogue:new(o)
 
   if o.parse then self:parse(o.parse) end
 
-  Timer.every(.1, function() o:write() end)
+  Timer.every(.05, function() o:write() end)
 
   return o
 end
@@ -77,9 +77,12 @@ function dialogue:draw(x,y)
   box(x,y,10,2,0,frames.speech,true)
   love.graphics.setColor(0,0,0)
   love.graphics.print(self.display,x,y)
-  love.graphics.setColor(1,1,1)
-  if string.len(self.display) == string.len(self.text[self.boxIndex]) then
-    -- TODO - move to bottom of box (draw over border and give a background)
-    love.graphics.draw(pressToContinue,x,y+16)
+  if string.len(self.display) == string.len(self.text[self.boxIndex]) and
+  self.text[self.boxIndex+1] then
+    -- make this nicer?
+    love.graphics.draw(k_tiles_trans,pressToContinue,x+(16*9),y+16+8)
   end
+  love.graphics.setColor(1,1,1)
+
+  -- TODO - also draw face, and make box bigger?
 end

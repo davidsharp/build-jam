@@ -6,6 +6,7 @@ function player:new(o)
   o.position = o.position or {x=0,y=0}
   o.direction = 'down'
   o.moving = false
+  o.frozen = false
   o.frame = 0
 
   o.sprites = {
@@ -70,7 +71,7 @@ end
 function player:update(dt)
   -- listen for keyboard buttons here? might be janky
   -- if moving, ignore buttons
-  if not self.moving then
+  if not self.frozen and not self.moving then
       -- on move, tween location to 16 in whichever direction
       local moveDir = nil
       local moveBy = {x=0,y=0}

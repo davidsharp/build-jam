@@ -1,17 +1,24 @@
 -- just a dictionary of characters
 
+-- about 24 characters fit per line
+-- (this could be smarter and calculated on the fly)
+
 downstairsBloke = {
   sprite = 'bloke',
   success = 'Great work today, I look forward to seeing how you do tomorrow',
   failure = 'Hard luck, come back refreshed tomorrow',
   dialog = {
     {
-      'Hey, so you must be the new builder',
-      'I have it here that you\'re contracted for a month?',
-      'Each day you\'ll need to build a new floor and a new home',
-      'But be careful! There are reports that our competition,',
-      'has been sneaking dangerous material into our supplies',
-      'and if they touch they could explode and set back your day\'s build'
+      'Hey, so you must be the\nnew builder',
+      'I have it here that you\'re\ncontracted for a month?',
+      'Each day you\'ll need to\nbuild a new floor,',
+      'And each new floor\nis a new home!',
+      'But be careful!',
+      'There are reports\nthat our competition',
+      'has been sneaking\ndangerous material',
+      'into our supplies!',
+      'And if they touch\nthey could explode!',
+      'Which will set back\nyour day\'s build'
     }
   }
 }
