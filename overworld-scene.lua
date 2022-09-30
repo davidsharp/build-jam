@@ -87,8 +87,11 @@ function overworldScene.getPerson()
           callback=function()
             dialog = nil
             matchScene.set({callback = function(win)
+              -- move player to always be facing up at person
+              player.position.x = 6*16
+              player.position.y = 3*16
+              player.direction = 'up'
               if win then
-                overworldScene.day = overworldScene.day + 1
                 overworldScene.floors = overworldScene.floors + 1
                 overworldScene.set()
                 dialog = dialogue:new({
@@ -96,16 +99,19 @@ function overworldScene.getPerson()
                   face=person.sprite..'_face',
                   callback=function()
                     player.frozen = false
+                    -- return to menu
+                    overworldScene.endDay()
                   end
                 })
               else
-                overworldScene.day = overworldScene.day + 1
                 overworldScene.set()
                 dialog = dialogue:new({
                   text={person.failure},
                   face=person.sprite..'_face',
                   callback=function()
                     player.frozen = false
+                    -- return to menu
+                   overworldScene.endDay()
                   end
                 })
               end
@@ -125,10 +131,50 @@ function overworldScene.getPerson()
   end
 end
 
+function overworldScene.endDay()
+  dialog = dialogue:new({
+    text = {'Wow, I\'m pooped!','I should wrap up\nfor the day'},
+    face = 'player',
+    callback = function()
+      dialog = nil
+      jukebox.fadeOut()
+      player.direction = 'down'
+      player.frame = 0
+      player.moving = true
+      Timer.tween(1,player.position,
+          {x=player.position.x,y=(player.position.y + 32)},
+          'linear',
+          function()
+            player.direction = 'right'
+          end
+        )
+      Timer.after(1,function()
+        Timer.tween(1,player.position,
+          {x=(player.position.x + 32),y=player.position.y},
+          'linear',
+          function()
+            player.moving = false
+          end
+        )
+      end)
+      Timer.after(2,function()
+        jukebox.start()
+        menuScene.set()
+        overworldScene.day = overworldScene.day + 1
+        overworldScene.usePlayerPosition = false
+        overworldScene.floor = 0
+      end)
+    end
+  })
+end
+
 function overworldScene.getStairsUp()
   if overworldScene.floor <= overworldScene.floors then
     return item:new({tile = tileMap['stairsUp'],position = {x=1*16,y=1*16},
     callback=function()
+      sfx.stairs:play()
+      Timer.after(0.2,function() sfx.stairs:play() end)
+      Timer.after(0.4,function() sfx.stairs:play() end)
       overworldScene.floor = overworldScene.floor + 1
       overworldScene.loadFloor()
       player.position.x = 8*16
@@ -150,6 +196,9 @@ function overworldScene.getStairsDown()
   if overworldScene.floor > 0 then
     return item:new({tile = tileMap['stairsDown'],position = {x=8*16,y=5*16},
     callback=function()
+      sfx.stairs:play()
+      Timer.after(0.3,function() sfx.stairs:play() end)
+      Timer.after(0.6,function() sfx.stairs:play() end)
       overworldScene.floor = overworldScene.floor - 1
       overworldScene.loadFloor()
       player.position.x = 1*16

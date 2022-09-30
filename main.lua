@@ -36,6 +36,8 @@ function love.load()
   ground_floor_outer = love.graphics.newImage('assets/building-bits/g-floor.png')
   other_floor_outer = love.graphics.newImage('assets/building-bits/other-floor.png')
 
+  player_tile = love.graphics.newImage('assets/1BITCanariPackTopDown/SPRITES/HEROS/spritesheets/HEROS1bit_Adventurer Idle D.png')
+
   tileMap = {
     -- match pieces
     brick1 = {sheet=k_tiles,quad=getTile(k_tiles,6,13)},
@@ -62,7 +64,8 @@ function love.load()
     woman = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,1)},
     woman_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,10)},
     oldMan = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,4)},
-    oldMan_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,27,10)}
+    oldMan_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,27,10)},
+    player = {sheet=player_tile, quad=getTile(player_tile,0,0)}
   }
 
   frame_tiles = love.graphics.newImage('assets/frames.png')
@@ -75,6 +78,7 @@ function love.load()
     land = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Attack02.wav', 'static'),
     explode = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Hurt01.wav', 'static'),
     clear = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Pickup01.wav', 'static'),
+    stairs = love.audio.newSource( 'assets/1BITCanariPackTopDown/SFX/Land01.wav', 'static'),
   }
   sfx.land:setVolume(0.4)
   sfx.explode:setVolume(0.4)

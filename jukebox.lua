@@ -40,12 +40,14 @@ function jukebox.switchTrack(to)
   ]]
 end
 
---[[
-function jukebox.fadeOut(track)
-    volumes[track] = 0.5
-    Timer.tween(5, volumes[track], 0.0, 'in-out-quad',function() music[game]:setVolume(volumes[track]) end)
+function jukebox.fadeOut()
+  Timer.tween(1, volumes, {
+    game = 0.0,
+    goofy = 0.0
+  }, 'linear',function() if currentTrack then music[currentTrack]:stop() end end)
 end
 
+--[[
 function jukebox.fadeIn(track)
   currentTrack = track
   volumes[track] = 0.0
