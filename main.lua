@@ -46,6 +46,7 @@ function love.load()
     bomb = {sheet=k_tiles_trans,quad=getTile(k_tiles,45,9)},
     spark = {sheet=k_tiles_trans,quad=getTile(k_tiles,36,11)},
     explosion = {sheet=k_tiles_trans,quad=getTile(k_tiles,37,11)},
+    glint = {sheet=k_tiles_trans,quad=getTile(k_tiles,28,12)},
     dust1 = {sheet=k_tiles_trans,quad=getTile(k_tiles,28,12)},
     dust2 = {sheet=k_tiles_trans,quad=getTile(k_tiles,29,12)},
     dust3 = {sheet=k_tiles_trans,quad=getTile(k_tiles,30,12)},

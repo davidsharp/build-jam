@@ -104,8 +104,17 @@ function match:update(dt)
     self:newPiece()
 
     -- check rows
-    self:checkLine(row-1)
-    self:checkLine(row)
+    local line = self:checkLine(row-1)
+    local line2 = self:checkLine(row)
+
+    if line or line2 then
+      self.frozen = true
+      Timer.after(0.2, function()
+        if line then self:clearLine(row) end
+        if line2 then self:clearLine(row) end
+        self.frozen = false
+      end)
+    end
 
     local explosions = match:findExplosions()
     if #explosions > 0 then match:explodeExplosions() end
@@ -329,15 +338,18 @@ function match:explodeExplosions()
   Timer.after(0.5, function() frozen = false end)
 end
 
-function match:findExplosions()
+function match:find(x)
   local explosions = {}
   for key,value in pairs(self.filled) do
-    if value == 'explosion' then
+    if value == x then
       local coords = split(key,'-')
       table.insert(explosions,{x = tonumber(coords[1]),y = tonumber(coords[2])})
     end
   end
   return explosions
+end
+function match:findExplosions()
+  return match:find('explosion')
 end
 
 -- accept an arbitrary number of rows?
@@ -348,7 +360,12 @@ function match:checkLine(row)
       foundEmpty = true
     end
   end
-  if not foundEmpty then self:clearLine(row) end
+  if not foundEmpty then
+    for i=0,dims.width do
+      self.filled[''..i..'-'..row] = 'glint'
+    end
+  end
+  return not foundEmpty
 end
 
 function match:clearLine(row)
@@ -424,6 +441,7 @@ function match:keypressed(key)
     paused = not paused
   end
 
+  local debug = true
   if debug and key == 'w' then
     self.callback(true)
   end
