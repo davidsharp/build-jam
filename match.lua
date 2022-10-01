@@ -441,7 +441,6 @@ function match:keypressed(key)
     paused = not paused
   end
 
-  local debug = true
   if debug and key == 'w' then
     self.callback(true)
   end

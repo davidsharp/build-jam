@@ -164,10 +164,14 @@ function overworldScene.endDay()
       Timer.after(2,function()
         --jukebox.start('goofy')
         --jukebox.switchTrack('goofy')
-        menuScene.set()
-        overworldScene.day = overworldScene.day + 1
-        overworldScene.usePlayerPosition = false
-        overworldScene.floor = 0
+        if overworldScene.day + 1 >= 15 then
+          endscoreScene.set()
+        else
+          menuScene.set()
+          overworldScene.day = overworldScene.day + 1
+          overworldScene.usePlayerPosition = false
+          overworldScene.floor = 0
+        end
       end)
     end
   })
@@ -266,5 +270,6 @@ function overworldScene.draw()
 end
 
 function overworldScene.keypressed(key)
+  if debug and key == 'd' then overworldScene.day = overworldScene.day + 1 end
 end
 
