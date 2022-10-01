@@ -13,6 +13,8 @@ downstairsBloke = {
       'I have it here that you\'re\ncontracted for a month?',
       'Each day you\'ll need to\nbuild a new floor,',
       'And each new floor\nis a new home!',
+      'Clearing lines will get\nyou closer to',
+      'your goal',
       'But be careful!',
       'There are reports\nthat our competition',
       'has been sneaking\ndangerous materials',
