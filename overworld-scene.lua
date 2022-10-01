@@ -74,7 +74,7 @@ function overworldScene.loadFloor()
 end
 
 function overworldScene.getPerson()
-  local person = overworldScene.floor == 0 and downstairsBloke or residents[(overworldScene.floor % #residents)+1]
+  local person = overworldScene.floor == 0 and downstairsBloke or residents[((overworldScene.floor+1) % #residents)+1]
   if true then
     return item:new({tile = tileMap[person.sprite],position = {x=6*16,y=2*16},solid = true,
     callback=function()
@@ -245,12 +245,12 @@ function overworldScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
   love.graphics.print('Floor '..(overworldScene.floor == 0 and 'G' or overworldScene.floor),16,16)
-  love.graphics.print(''..overworldScene.day..(
-    (overworldScene.day % 10 == 1 and 'st') or
-    (overworldScene.day % 10 == 2 and 'nd') or
-    (overworldScene.day % 10 == 3 and 'rd') or
+  love.graphics.print(''..(overworldScene.day + 18 <= 30 and overworldScene.day + 18 or overworldScene.day - 12)..(
+    ((overworldScene.day + 18) % 10 == 1 and 'st') or
+    ((overworldScene.day + 18) % 10 == 2 and 'nd') or
+    ((overworldScene.day + 18) % 10 == 3 and 'rd') or
     'th'
-  )..' September',16,32)
+  )..(overworldScene.day <= 12 and ' September' or ' October'),16,32)
   if person then person:draw(world_x,world_y) end
   if stairsDown then stairsDown:draw(world_x,world_y) end
   if stairsUp then stairsUp:draw(world_x,world_y) end
