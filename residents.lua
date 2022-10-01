@@ -10,7 +10,7 @@ downstairsBloke = {
   dialog = {
     {
       'Hey, so you must be the\nnew builder',
-      'I have it here that you\'re\ncontracted for a month?',
+      'I have it here that you\'re\ncontracted for a fortnight?',
       'Each day you\'ll need to\nbuild a new floor,',
       'And each new floor\nis a new home!',
       'Clearing lines will get\nyou closer to',
@@ -41,5 +41,14 @@ residents = {
     dialog = {
       {'Thanks for building me\nsuch a lovely home!'}
     }
-  }
+  },
+  {
+    sprite = 'man',
+    request = 'Build me a home, plz',
+    success = 'Wow, thanks!',
+    failure = 'Dang, I\'ll have to find\na home elsewhere',
+    dialog = {
+      {'Thanks for building me\nsuch a lovely home!'}
+    }
+  },
 }

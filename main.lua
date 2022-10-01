@@ -61,7 +61,7 @@ function love.load()
     bloke = {sheet=k_tiles_trans, quad=getTile(k_tiles,29,1)},
     bloke_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,10)},
     man = {sheet=k_tiles_trans, quad=getTile(k_tiles,27,1)},
-    man_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,23,10)},
+    man_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,24,10)},
     woman = {sheet=k_tiles_trans, quad=getTile(k_tiles,26,1)},
     woman_face = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,10)},
     oldMan = {sheet=k_tiles_trans, quad=getTile(k_tiles,25,4)},
