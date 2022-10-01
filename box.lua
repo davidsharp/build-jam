@@ -5,8 +5,8 @@
 function box(x,y,w,h,border,frame,invert)
   local width = (w * 16)
   local height = (h * 16)
-  frame = frame or frames.screw
-  boxBorderQuads = boxBorderQuads or {
+  local frame = frame or frames.screw
+  local boxBorderQuads = {
     tl = love.graphics.newQuad((frame.x * (8*3)), (frame.y * (8*3)), 8, 8, frame_tiles),
     br = love.graphics.newQuad((frame.x * (8*3))+16, (frame.y * (8*3))+16, 8, 8, frame_tiles),
     tr = love.graphics.newQuad((frame.x * (8*3))+16, (frame.y * (8*3)), 8, 8, frame_tiles),
