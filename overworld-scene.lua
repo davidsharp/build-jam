@@ -175,6 +175,14 @@ function overworldScene.endDay()
       end)
     end
   })
+
+  -- save progress!
+  local success, message = love.filesystem.write(filename, ""..overworldScene.day.."|"..overworldScene.floors)
+  --[[if success then 
+    print ('file created')
+  else 
+    print ('file not created: '..message)
+  end]]
 end
 
 function overworldScene.getStairsUp()

@@ -15,12 +15,20 @@ function menuScene.set()
   menuScene.load()
 end
 
+filename = 'build.sav'
 function menuScene.load()
   -- temporary
   jukebox.switchTrack('goofy')
 
   if not menuScene.ready then
     Timer.after(2,function() menuScene.ready = true end)
+    local info = love.filesystem.getInfo(filename)
+    if info then
+      local contents, size = love.filesystem.read(filename)
+      local data = split(contents,'|')
+      overworldScene.day = tonumber(data[1])
+      overworldScene.floors = tonumber(data[2])
+    end
   end
   -- reset player position and animate
   overworldScene.usePlayerPosition = false
@@ -37,24 +45,31 @@ function menuScene.update(dt)
   jukebox.update(dt)
 end
 
-local world_x = 16*(12.5-5)
+local world_x = 16*(12.5)
 local world_y = 16*3
 function menuScene.draw()
   love.graphics.scale(2)
   map:draw(world_x,world_y-(overworldScene.floors*32),2,2)
   if stairs then stairs:draw(world_x,world_y-(overworldScene.floors*32)) end
   drawBuilding(world_x,world_y+(7*16)-(overworldScene.floors*32))
-  love.graphics.print("build [working title]",8.5*16,12*16)
-  if menuScene.ready then love.graphics.print("press enter to start",8.5*16,13*16) end
+  love.graphics.print("Build 'n' Blocks",3*16,5*16)
+  if menuScene.ready then
+    love.graphics.print("press enter to start",2*16,6.5*16)
+    love.graphics.print("or s for settings",2.5*16,7.5*16)
+  end
 end
 
 function menuScene.keypressed(key)
   if menuScene.ready and key == 'return' then
-    overworldScene.set()
+    if overworldScene.day > 14 then
+      endscoreScene.set()
+    else
+      overworldScene.set()
+    end
   end
   if menuScene.ready and key == 's' then
-    -- settingsScene.set()
+    settingsScene.set()
     -- test adding floors
-    --overworldScene.floors = overworldScene.floors + 1
+    -- overworldScene.floors = overworldScene.floors + 1
   end
 end

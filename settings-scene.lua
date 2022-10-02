@@ -24,10 +24,11 @@ function settingsScene.draw()
   -- settings
   love.graphics.print('SETTINGS',16,16)
   -- arrow
-  love.graphics.print('~',2*16,32+((settingsScene.position%3)*16))
-  love.graphics.print('Music '..(true and '[on]' or 'off'),3*16,2*16)
-  love.graphics.print('SFX '..(true and '[on]' or 'off'),3*16,3*16)
-  love.graphics.print('< back',3*16,4*16)
+  love.graphics.print('~',2*16,32+((settingsScene.position%2)*16))
+  love.graphics.print('delete progress',3*16,2*16)
+  --love.graphics.print('Music '..(true and '[on]' or 'off'),3*16,2*16)
+  --love.graphics.print('SFX '..(true and '[on]' or 'off'),3*16,3*16)
+  love.graphics.print('< back',3*16,3*16)
 
   -- credits
   love.graphics.print('CREDITS',16,5*16)
@@ -49,8 +50,12 @@ function settingsScene.keypressed(key)
     settingsScene.position = settingsScene.position - 1
   end
   if key == 'space' or key == 'return' then
-    if settingsScene.position % 3 == 2 then
+    if settingsScene.position % 2 == 1 then
       menuScene.set()
+    end
+    if settingsScene.position % 2 == 0 then
+      love.filesystem.remove(filename)
+      love.event.quit('restart')
     end
   end
 end
