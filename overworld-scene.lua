@@ -74,7 +74,7 @@ function overworldScene.loadFloor()
 end
 
 function overworldScene.getPerson()
-  local person = overworldScene.floor == 0 and downstairsBloke or residents[((overworldScene.floor+1) % #residents)+1]
+  local person = overworldScene.floor == 0 and downstairsBloke or residents[((overworldScene.floor+2) % #residents)+1]
   if true then
     return item:new({tile = tileMap[person.sprite],position = {x=6*16,y=2*16},solid = true,
     callback=function()
@@ -169,6 +169,7 @@ function overworldScene.endDay()
         --jukebox.switchTrack('goofy')
         if overworldScene.day + 1 >= 15 then
           endscoreScene.set()
+          overworldScene.day = overworldScene.day + 1
         else
           menuScene.set()
           overworldScene.day = overworldScene.day + 1
@@ -255,17 +256,21 @@ end
 
 local world_x = 16*(12.5-5)
 local world_y = 16*3
+local days = {
+  'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'
+}
 function overworldScene.draw()
   if debug then drawDebug() end
   love.graphics.scale(2)
   map:draw(world_x,world_y,2,2)
   love.graphics.print('Floor '..(overworldScene.floor == 0 and 'G' or overworldScene.floor),16,16)
+  love.graphics.print(days[(overworldScene.day%7)+1],16,16*3)
   love.graphics.print(''..(overworldScene.day + 18 <= 30 and overworldScene.day + 18 or overworldScene.day - 12)..(
     ((overworldScene.day + 18) % 10 == 1 and 'st') or
     ((overworldScene.day + 18) % 10 == 2 and 'nd') or
     ((overworldScene.day + 18) % 10 == 3 and 'rd') or
     'th'
-  )..(overworldScene.day <= 12 and ' September' or ' October'),16,32)
+  )..(overworldScene.day <= 12 and ' September' or ' October'),16,16*2)
   if person then person:draw(world_x,world_y) end
   if stairsDown then stairsDown:draw(world_x,world_y) end
   if stairsUp then stairsUp:draw(world_x,world_y) end

@@ -35,9 +35,9 @@ downstairsBloke = {
 residents = {
   {
     sprite = 'woman',
-    request = 'Build me a home, plz',
-    success = 'Wow, thanks!',
-    failure = 'Dang, I\'ll have to find\na home elsewhere',
+    request = 'I\'d love for you to try\nand build me a home',
+    success = 'Oh, I love it!\n Thanks you!',
+    failure = 'Too bad, you\'ll have\nto try again tomorrow',
     dialog = {
       {'Thanks for building me\nsuch a lovely home!'}
     }
@@ -46,7 +46,16 @@ residents = {
     sprite = 'man',
     request = 'Build me a home, plz',
     success = 'Wow, thanks!',
-    failure = 'Dang, I\'ll have to find\na home elsewhere',
+    failure = 'Too bad, you\'ll have\nto try again tomorrow',
+    dialog = {
+      {'Thanks for building me\nsuch a lovely home!'}
+    }
+  },
+  {
+    sprite = 'oldMan',
+    request = 'Please build me a home,\nyoung\'un',
+    success = 'I\'ve not seen a nicer home\nin all my years!',
+    failure = 'Too bad, you\'ll have\nto try again tomorrow',
     dialog = {
       {'Thanks for building me\nsuch a lovely home!'}
     }
