@@ -43,9 +43,7 @@ function player:draw(x,y)
   -- if moving, get animation frame
   -- math.floor(o.frame/4) -- something _like_ this
 
-  local flipX = self.direction == 'left' --[[or
-    ((self.direction == 'up' or self.direction == 'down')
-      and (self.moving and math.floor(self.frame % 8) > 4))]]
+  local flipX = self.direction == 'left'
   if self.moving then
     local quad = love.graphics.newQuad(
       math.floor(self.frame % 4) * 16, 0, 16, 16,
