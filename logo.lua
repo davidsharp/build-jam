@@ -15,7 +15,8 @@ function logo(x,y)
     c = getTile(k_tiles_trans,offset_x + 2,offset_y + 1),
     k = getTile(k_tiles_trans,offset_x + 10,offset_y + 1),
     s = getTile(k_tiles_trans,offset_x + 5,offset_y + 2),
-    block = getTile(k_tiles_trans,offset_x + 4,offset_y - 3)
+    block = getTile(k_tiles_trans,offset_x + 4,offset_y - 3),
+    dash = getTile(k_tiles_trans,offset_x + 2,offset_y + 3)
   }
   
   love.graphics.draw(k_tiles_trans, quads.b, x, y)
@@ -29,8 +30,12 @@ function logo(x,y)
   love.graphics.draw(k_tiles_trans, quads.d, x+(16*4), y)
   love.graphics.draw(k_tiles_trans, quads.block, x+(16*4), y)
 
+  love.graphics.draw(k_tiles_trans, quads.dash, x+(16*1.25), y+16,0,.5,1)
+  love.graphics.draw(k_tiles_trans, quads.block, x+(16*1), y+16)
   love.graphics.draw(k_tiles_trans, quads.n, x+(16*2), y+16)
   love.graphics.draw(k_tiles_trans, quads.block, x+(16*2), y+16)
+  love.graphics.draw(k_tiles_trans, quads.dash, x+(16*3.25), y+16,0,.5,1)
+  love.graphics.draw(k_tiles_trans, quads.block, x+(16*3), y+16)
 
   love.graphics.draw(k_tiles_trans, quads.b, x-8, y+32)
   love.graphics.draw(k_tiles_trans, quads.block, x-8, y+32)
