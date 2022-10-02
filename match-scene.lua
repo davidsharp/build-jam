@@ -49,10 +49,10 @@ function matchScene.draw()
   love.graphics.print("next",(14*16), (2*16))
   drawPiece(gameState.match.next,(15*16), (4*16))
 
-  love.graphics.print("floors:"..gameState.match.lines,(14*16), (6*16))
-  love.graphics.print("target:"..gameState.match.target,(14*16), (7*16))
-  love.graphics.print("time elapsed:"..math.floor(gameState.match.timeElapsed),(14*16), (8*16))
-  love.graphics.print("time remaining:"..math.floor(gameState.match.timeToBeat - gameState.match.timeElapsed),(14*16), (9*16))
+  love.graphics.print("lines: "..gameState.match.lines,(14*16), (6*16))
+  love.graphics.print("target: "..gameState.match.target,(14*16), (7*16))
+
+  love.graphics.print("time: "..math.floor(gameState.match.timeToBeat - gameState.match.timeElapsed),(14*16), (9*16))
 end
 
 function matchScene.keypressed(key)
