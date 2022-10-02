@@ -43,7 +43,9 @@ function player:draw(x,y)
   -- if moving, get animation frame
   -- math.floor(o.frame/4) -- something _like_ this
 
-  local flipX = self.direction == 'left'
+  local flipX = self.direction == 'left' --[[or
+    ((self.direction == 'up' or self.direction == 'down')
+      and (self.moving and math.floor(self.frame % 8) > 4))]]
   if self.moving then
     local quad = love.graphics.newQuad(
       math.floor(self.frame % 4) * 16, 0, 16, 16,
@@ -132,7 +134,7 @@ function player:update(dt)
         local y = ((self.position.y + moveBy.y)/16)+1
         local data = map.layers and map.layers[1] and map.layers[1].data
         wallCollision = (data and data[y] and data[y][x] and data[y][x].gid ~= 0) or false
-        self.frame = 0
+        --self.frame = 0
         self.moving = true
         self.direction = moveDir
         if collision and collision.solid then

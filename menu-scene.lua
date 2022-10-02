@@ -45,7 +45,7 @@ function menuScene.update(dt)
   jukebox.update(dt)
 end
 
-local world_x = 16*(12.5)
+local world_x = 16*(11.5)
 local world_y = 16*3
 function menuScene.draw()
   love.graphics.scale(2)
