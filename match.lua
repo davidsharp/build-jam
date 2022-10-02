@@ -5,7 +5,7 @@ require 'piece'
 require 'dialogue'
 
 match = {
-  speed = 45,
+  speed = 60,
   moveBy = 16
 }
 
@@ -23,7 +23,7 @@ function match:new(o)
     o.target = o.target or 10
 
     o.timeElapsed = 0
-    o.timeToBeat = 120
+    o.timeToBeat = o.time or 120
 
     o.callback = o.callback or function() end
 

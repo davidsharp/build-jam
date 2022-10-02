@@ -10,12 +10,18 @@ function matchScene.set(o)
   love.keypressed = matchScene.keypressed
 
   matchScene.callback = o.callback or function() end
+  matchScene.target = o.target or 10
+  matchScene.time = o.time or 90
 
   matchScene.load()
 end
 
 function matchScene.load()
-  gameState.match = match:new({callback =  matchScene.callback})
+  gameState.match = match:new({
+    callback =  matchScene.callback,
+    target = matchScene.target,
+    time = matchScene.time
+  })
   jukebox.switchTrack('game')
 end
 

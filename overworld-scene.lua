@@ -86,7 +86,10 @@ function overworldScene.getPerson()
           face=person.sprite..'_face',
           callback=function()
             dialog = nil
-            matchScene.set({callback = function(win)
+            matchScene.set({
+              target = 10 + (overworldScene.floors * 2),
+              time = 90 + (overworldScene.floors * 2) + ((overworldScene.day - 1) * 2),
+              callback = function(win)
               -- move player to always be facing up at person
               player.position.x = 6*16
               player.position.y = 3*16
