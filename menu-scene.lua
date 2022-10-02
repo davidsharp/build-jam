@@ -52,10 +52,11 @@ function menuScene.draw()
   map:draw(world_x,world_y-(overworldScene.floors*32),2,2)
   if stairs then stairs:draw(world_x,world_y-(overworldScene.floors*32)) end
   drawBuilding(world_x,world_y+(7*16)-(overworldScene.floors*32))
-  love.graphics.print("Build 'n' Blocks",3*16,5*16)
+  --love.graphics.print("Build 'n' Blocks",3*16,5*16)
+  logo(3*16,4.5*16)
   if menuScene.ready then
-    love.graphics.print("press enter to start",2*16,6.5*16)
-    love.graphics.print("or s for settings",2.5*16,7.5*16)
+    love.graphics.print("press enter to start",2*16,8.5*16)
+    love.graphics.print("or s for settings",2.5*16,9.5*16)
   end
 end
 

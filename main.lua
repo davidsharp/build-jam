@@ -12,6 +12,7 @@ require 'player'
 require 'jukebox'
 require 'item'
 require 'drawBuilding'
+require 'logo'
 
 debug = false
 
