@@ -46,7 +46,8 @@ love.filesystem.remove = TODO
 
 love.event = {}
 
-love.event.quit = TODO
+-- no-op, don't need to quit out from game
+love.event.quit = function() end
 
 -- STI uses these
 love.data = {}
