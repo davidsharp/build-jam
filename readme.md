@@ -1,3 +1,5 @@
+![](https://github.com/davidsharp/build-jam/raw/main/banner.png)
+
 # Build-n-Blocks
 
 A game made for a small jam with friends with the theme **"build"**. Built in Love2D.
