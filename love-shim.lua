@@ -15,11 +15,33 @@ love.graphics.newQuad = function(x, y, w, h, tiles)
   return {x,y,w,h}
 end
 
+-- use tiles as an index in a memoised table
+invertedTiles = {}
 love.graphics.draw = function(tiles, fauxQuad, x, y)
   TODO()
+
+  drawMe = nil
+  if inverted then
+    if invertedTiles[tiles] == nil then
+      invertedTiles[tiles] = playdate.graphics.image:invertedImage()
+    end
+    drawMe = invertedTiles[tiles]
+  else
+    drawMe = tiles
+  end
+
+  -- actually draw here
 end
 
-love.graphics.setColor = TODO
+-- set flag and draw inverted if true?
+inverted = false
+love.graphics.setColor = function(colourBit)
+  if colourBit == 0 then
+    inverted = true
+  else
+    inverted = false
+  end
+end
 
 love.graphics.rectangle = TODO
 
