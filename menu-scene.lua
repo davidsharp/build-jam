@@ -55,7 +55,8 @@ function menuScene.draw()
   --love.graphics.print("Build 'n' Blocks",3*16,5*16)
   logo(3*16,4.5*16)
   if menuScene.ready then
-    love.graphics.print("press enter to start",2*16,8.5*16)
+    local newGame = (overwordScene and overworldScene.days > 1 ) 
+    love.graphics.print("press enter to "..(newGame and "start" or "continue"),(newGame and 2 or 1.5)*16,8.5*16)
     love.graphics.print("or s for settings",2.5*16,9.5*16)
   end
 end
