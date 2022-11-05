@@ -36,7 +36,7 @@ residents = {
   {
     sprite = 'woman',
     request = 'I\'d love for you to try\nand build me a home',
-    success = 'Oh, I love it!\n Thanks you!',
+    success = 'Oh, I love it!\nThank you!',
     failure = 'Too bad, you\'ll have\nto try again tomorrow',
     dialog = {
       {'Thanks for building me\nsuch a lovely home!'}
