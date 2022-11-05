@@ -64,6 +64,7 @@ end
 function matchScene.keypressed(key)
   if key == 'escape' then
     menuScene.set()
+    overworldScene.floor = 0
   end
   if not gameState.match then return end
   gameState.match:keypressed(key)
