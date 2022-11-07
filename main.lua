@@ -31,6 +31,8 @@ function love.load()
   font = love.graphics.newFont( 'assets/MatchupPro/MatchupPro.ttf', 16 )
   love.graphics.setFont(font)
 
+  math.randomseed( tonumber(tostring(os.time()):reverse():sub(1,6)) )
+
   tiles = love.graphics.newImage('assets/1BITCanariPackTopDown/TILESET/PixelPackTOPDOWN1BIT.png')
   k_tiles = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome_packed.png')
   k_tiles_trans = love.graphics.newImage('assets/1bitpack_kenney_1.2/Tilesheet/monochrome-transparent_packed.png')
