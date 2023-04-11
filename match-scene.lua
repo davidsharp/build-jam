@@ -57,6 +57,7 @@ function matchScene.draw()
 
   love.graphics.print("lines: "..gameState.match.lines,(14*16), (6*16))
   love.graphics.print("target: "..gameState.match.target,(14*16), (7*16))
+  love.graphics.print("level: "..overworldScene.floors,(18*16), (3.5*16))
 
   love.graphics.print("time: "..math.floor(gameState.match.timeToBeat - gameState.match.timeElapsed),(14*16), (9*16))
 end
