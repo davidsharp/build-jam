@@ -36,7 +36,7 @@ function overworldScene.load()
   player.direction = 'up'
   player.frame = 0
   player.moving = true
-  Timer.tween(0.5,player.position,
+  Timer.tween(player_speed,player.position,
     {x=player.position.x,y=player.position.y - 16},
     'linear',
     function()
@@ -203,7 +203,7 @@ function overworldScene.getStairsUp()
       player.direction = 'left'
       player.frame = 0
       player.moving = true
-      Timer.tween(0.5,player.position,
+      Timer.tween(player_speed,player.position,
           {x=player.position.x - 16,y=player.position.y},
           'linear',
           function()
@@ -227,7 +227,7 @@ function overworldScene.getStairsDown()
       player.direction = 'down'
       player.frame = 0
       player.moving = true
-      Timer.tween(0.5,player.position,
+      Timer.tween(player_speed,player.position,
           {x=player.position.x,y=(player.position.y + 16)},
           'linear',
           function()

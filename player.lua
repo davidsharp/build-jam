@@ -1,5 +1,7 @@
 player = {}
 
+player_speed = 0.25
+
 function player:new(o)
   o = o or {}
 
@@ -46,7 +48,7 @@ function player:draw(x,y)
   local flipX = self.direction == 'left'
   if self.moving then
     local quad = love.graphics.newQuad(
-      math.floor(self.frame % 4) * 16, 0, 16, 16,
+      math.floor((self.frame*2) % 4) * 16, 0, 16, 16,
       self.sprites.walking[self.direction]
     )
     love.graphics.draw(
@@ -139,11 +141,11 @@ function player:update(dt)
           -- don't move and activate callback
           -- consider action button instead?
           collision.callback()
-          Timer.after(0.2,function() self.moving = false end)
+          Timer.after(player_speed,function() self.moving = false end)
         -- non-solid collision negates solid walls
         elseif wallCollision and not collision then
-          Timer.after(0.2,function() self.moving = false end)
-        else Timer.tween(0.5,self.position,
+          Timer.after(player_speed,function() self.moving = false end)
+        else Timer.tween(player_speed,self.position,
           {x=(self.position.x + moveBy.x),y=(self.position.y + moveBy.y)},
           'linear',
           function()
