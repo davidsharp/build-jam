@@ -74,14 +74,16 @@ love.filesystem.getInfo = TODO
 
 love.filesystem.read = TODO
 
+love.filesystem.write = TODO
+
 love.filesystem.remove = TODO
 
 love.event = {}
 
 -- no-op, don't need to quit out from game
-love.event.quit = function() end
+love.event.quit = NOOP
 
--- STI uses these
+-- STI uses these, consider stubbing out STI entirely?
 love.data = {}
 love.math = {}
 love.physics = {}

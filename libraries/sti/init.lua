@@ -14,11 +14,11 @@ local STI = {
 STI.__index = STI
 
 local love  = _G.love
-local cwd   = (...):gsub('%.init$', '') .. "."
-local utils = require(cwd .. "utils")
+--local cwd   = (...):gsub('%.init$', '') .. "."
+local utils = import "libraries/sti/utils"--require(cwd .. "utils")
 local ceil  = math.ceil
 local floor = math.floor
-local lg    = require(cwd .. "graphics")
+local lg    = import "libraries/sti/graphics"--require(cwd .. "graphics")
 local Map   = {}
 Map.__index = Map
 

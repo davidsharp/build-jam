@@ -1,18 +1,20 @@
-Timer = require 'libraries/hump/timer'
-sti = require 'libraries/sti'
+import = require
 
-require 'menu-scene'
-require 'match-scene'
-require 'overworld-scene'
-require 'settings-scene'
-require 'endscore-scene'
-require 'util'
-require 'box'
-require 'player'
-require 'jukebox'
-require 'item'
-require 'drawBuilding'
-require 'logo'
+Timer = import 'libraries/hump/timer'
+sti = import 'libraries/sti'
+
+import 'menu-scene'
+import 'match-scene'
+import 'overworld-scene'
+import 'settings-scene'
+import 'endscore-scene'
+import 'util'
+import 'box'
+import 'player'
+import 'jukebox'
+import 'item'
+import 'drawBuilding'
+import 'logo'
 
 debug = false
 

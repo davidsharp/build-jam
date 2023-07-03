@@ -1,8 +1,8 @@
 -- match class, inits, draws and stores state of match
 
-require 'piece'
+import 'piece'
 
-require 'dialogue'
+import 'dialogue'
 
 match = {
   speed = 60,
