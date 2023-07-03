@@ -2,9 +2,11 @@
 
 love = {}
 
-local TOOD = function()
+local TODO = function()
   print('TODO')
 end
+
+local NOOP = function() end
 
 love.graphics = {}
 
@@ -47,8 +49,16 @@ love.graphics.rectangle = TODO
 
 love.graphics.print = TODO
 
+love.graphics.newFont = TODO
+
+love.graphics.setFont = TODO
+
 -- no-op, Used for Love2D only
-love.graphics.scale = function() end
+love.graphics.scale = NOOP
+love.graphics.setDefaultFilter = NOOP
+love.mouse = {
+  setVisible = NOOP
+}
 
 love.audio = {}
 
