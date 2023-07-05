@@ -1,0 +1,7 @@
+name=Build-n-Blocks
+author=David Sharp
+description=A falling block puzzle game about building
+bundleID=codes.davidsharp.buildnblocks
+version=0.0
+buildNumber=0
+imagePath=banner.png
