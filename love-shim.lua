@@ -1,4 +1,5 @@
 -- import _before_ main
+require = import
 
 love = {}
 
@@ -87,3 +88,17 @@ love.event.quit = NOOP
 love.data = {}
 love.math = {}
 love.physics = {}
+
+-- super specific to this project, could just hard code map details somewhere
+function loadLuaMap(path)
+  local t = import(path)
+  imageTable = playdate.graphics.imagetable.new("./assets/1BITCanariPackTopDown/TILESET/PixelPackTOPDOWN1BIT-table-16-16.png")
+  local tilemap = playdate.graphics.tilemap.new()
+  tilemap:setImageTable(imageTbale)
+
+  local layer = t.layers[1]
+  tilemap:setSize(layer.tileWidth, layer.tileHeight)
+  tilemap:setTiles(layer.data, layer.width)
+
+  return tileMap
+end
